@@ -188,13 +188,14 @@
         <!-- Header / Navigation -->
         <header class="nav-glass sticky top-0 z-50">
             <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-                <a href="#" onclick="showMainContent(); return false;" class="text-2xl font-bold tracking-tighter">
+                <a href="#" onclick="showMainPage(); return false;" class="text-2xl font-bold tracking-tighter">
                     Panduan<span class="gradient-text">Koding</span>
                 </a>
                 <div class="hidden md:flex items-center space-x-8 font-medium">
                     <a href="#pilih-proyek" class="text-gray-600 hover:text-black transition-colors duration-300">Proyek</a>
                     <a href="#fitur" class="text-gray-600 hover:text-black transition-colors duration-300">Fitur</a>
                     <a href="#ulasan" class="text-gray-600 hover:text-black transition-colors duration-300">Ulasan</a>
+                    <a href="#" onclick="showHistoryPage(); return false;" class="text-gray-600 hover:text-black transition-colors duration-300">Sejarah</a>
                 </div>
                 <a href="#pilih-proyek" class="bg-white text-black font-semibold px-5 py-2 rounded-lg hover:bg-gray-200 transition-colors duration-300 transform hover:scale-105">
                     Mulai Belajar
@@ -203,8 +204,8 @@
         </header>
 
         <main>
-            <!-- Hero Section -->
-            <section class="spotlight-effect py-24 md:py-32">
+            <!-- Hero Section (main-page-content) -->
+            <section class="main-page-content spotlight-effect py-24 md:py-32">
                 <!-- Canvas untuk animasi matrix -->
                 <canvas id="matrix-canvas"></canvas>
                 <div class="container mx-auto px-6 text-center relative z-10">
@@ -228,8 +229,8 @@
                 </div>
             </section>
 
-            <!-- Project Selection Section -->
-            <section id="pilih-proyek" class="py-20 md:py-28">
+            <!-- Project Selection Section (main-page-content) -->
+            <section id="pilih-proyek" class="main-page-content py-20 md:py-28">
                 <div class="container mx-auto px-6">
                     <div class="text-center max-w-2xl mx-auto mb-16 reveal">
                         <h2 class="text-3xl md:text-5xl font-bold tracking-tighter mb-4 text-gray-900">Kamu Ingin Belajar <span class="gradient-text">Apa?</span></h2>
@@ -264,8 +265,8 @@
                 </div>
             </section>
             
-            <!-- Features Section -->
-            <section id="fitur" class="py-20 md:py-28">
+            <!-- Features Section (main-page-content) -->
+            <section id="fitur" class="main-page-content py-20 md:py-28">
                  <div class="container mx-auto px-6">
                     <div class="text-center max-w-2xl mx-auto mb-16 reveal">
                         <h2 class="text-3xl md:text-5xl font-bold tracking-tighter mb-4 text-gray-900">Kenapa <span class="gradient-text">PanduanKoding?</span></h2>
@@ -294,8 +295,52 @@
                  </div>
             </section>
 
-            <!-- Testimonials Section -->
-            <section id="ulasan" class="py-20 md:py-28 spotlight-effect">
+            <!-- History Section (sejarah-page-content, hidden by default) -->
+            <section id="sejarah" class="py-20 md:py-28 bg-gray-50 hidden">
+                <div class="container mx-auto px-6">
+                    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                        <h2 class="text-3xl md:text-5xl font-bold tracking-tighter mb-4 text-gray-900">Jejak Evolusi <span class="gradient-text">Koding</span></h2>
+                        <p class="text-lg text-gray-600">
+                            Menelusuri perjalanan dari konsep mekanis di abad ke-19 hingga era kecerdasan buatan modern yang kita nikmati hari ini.
+                        </p>
+                    </div>
+
+                    <div class="text-center mb-12">
+                        <a href="#" onclick="showMainPage(); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Halaman Utama
+                        </a>
+                    </div>
+
+                    <div class="relative max-w-4xl mx-auto">
+                        <!-- Vertical Line -->
+                        <div class="absolute left-4 md:left-1/2 w-0.5 h-full bg-gray-300 -translate-x-1/2"></div>
+
+                        <!-- History Items -->
+                        <div class="space-y-12">
+                            <div class="reveal glass-card p-8 rounded-2xl">
+                                <h3 class="text-2xl font-bold mb-3 text-gray-900">1. Awal Mula (Abad ke-19)</h3>
+                                <p class="text-gray-700 leading-relaxed"><strong>Charles Babbage (1830-an):</strong> Matematikawan Inggris ini merancang Mesin Analitik (Analytical Engine), sebuah konsep mesin komputasi mekanis serbaguna yang dianggap sebagai prototipe komputer modern pertama.<br><br><strong>Ada Lovelace (1840-an):</strong> Dikenal sebagai programmer komputer pertama, ia menulis algoritma untuk Mesin Analitik untuk menghitung bilangan Bernoulli dan menyadari potensi mesin di luar kalkulasi angka.</p>
+                            </div>
+                            <div class="reveal glass-card p-8 rounded-2xl">
+                                <h3 class="text-2xl font-bold mb-3 text-gray-900">2. Era Komputer Awal (1940-an - 1950-an)</h3>
+                                <p class="text-gray-700 leading-relaxed">Perang Dunia II mempercepat pengembangan komputer elektronik seperti ENIAC. Pemrograman awalnya dilakukan dengan pengkabelan ulang manual atau kode mesin (biner). Bahasa Assembly muncul pada 1949, diikuti oleh bahasa tingkat tinggi pertama seperti <strong>Autocode (1952)</strong> dan <strong>FORTRAN (1957)</strong> yang merevolusi cara manusia berinteraksi dengan mesin.</p>
+                            </div>
+                            <div class="reveal glass-card p-8 rounded-2xl">
+                                <h3 class="text-2xl font-bold mb-3 text-gray-900">3. Perkembangan & Paradigma Baru (1960-an - 1980-an)</h3>
+                                <p class="text-gray-700 leading-relaxed">Bahasa berpengaruh seperti ALGOL, BASIC, dan PASCAL lahir. Namun, <strong>Bahasa C (1972)</strong> oleh Dennis Ritchie menjadi tonggak sejarah karena keseimbangannya, memengaruhi C++, Java, dan Python. Konsep <strong>Pemrograman Berorientasi Objek (OOP)</strong> juga menjadi populer, memungkinkan kode diatur menjadi objek yang lebih terstruktur.</p>
+                            </div>
+                            <div class="reveal glass-card p-8 rounded-2xl">
+                                <h3 class="text-2xl font-bold mb-3 text-gray-900">4. Era Internet & Modern (1990-an - Sekarang)</h3>
+                                <p class="text-gray-700 leading-relaxed">Ledakan internet memicu lahirnya bahasa untuk pengembangan web: <strong>HTML (1991)</strong> untuk struktur, <strong>Python (1991)</strong> sebagai bahasa serbaguna, serta <strong>Java (1995)</strong> dan <strong>JavaScript (1995)</strong> yang krusial untuk fungsionalitas web. Abad ke-21 menyaksikan revolusi komputasi mobile, cloud, Big Data, dan AI, dengan kerangka kerja (framework) modern menjadi standar untuk menyederhanakan pengembangan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials Section (main-page-content) -->
+            <section id="ulasan" class="main-page-content py-20 md:py-28 spotlight-effect ">
                 <div class="container mx-auto px-6 relative z-10">
                     <div class="text-center max-w-2xl mx-auto mb-16 reveal">
                         <h2 class="text-3xl md:text-5xl font-bold tracking-tighter mb-4 text-gray-900">Apa Kata Mereka?</h2>
@@ -390,8 +435,8 @@
                 </div>
             </section>
             
-            <!-- CTA Section -->
-            <section class="py-20 md:py-28">
+            <!-- CTA Section (main-page-content) -->
+            <section id="cta" class="main-page-content py-20 md:py-28">
                 <div class="container mx-auto px-6">
                     <div class="bg-gray-900 rounded-2xl p-8 md:p-16 text-center reveal glitter-effect">
                          <h2 class="text-3xl md:text-5xl font-bold tracking-tighter mb-4 text-white glow-text">
@@ -1627,6 +1672,29 @@ dan marino = ujicoba web site</p>
         
         window.addEventListener('scroll', reveal);
         reveal(); // Initial check
+
+        // --- Page Navigation Logic ---
+        function showHistoryPage() {
+            // Sembunyikan semua section halaman utama
+            document.querySelectorAll('.main-page-content').forEach(section => {
+                section.classList.add('hidden');
+            });
+            // Tampilkan section sejarah
+            document.getElementById('sejarah').classList.remove('hidden');
+            // Gulir ke atas
+            window.scrollTo(0, 0);
+            feather.replace(); // Muat ulang ikon
+        }
+
+        function showMainPage() {
+            // Tampilkan semua section halaman utama
+            document.querySelectorAll('.main-page-content').forEach(section => {
+                section.classList.remove('hidden');
+            });
+            // Sembunyikan section sejarah
+            document.getElementById('sejarah').classList.add('hidden');
+            showMainContent(); // Panggil fungsi ini untuk menangani halaman tutorial jika ada
+        }
         
         // Page navigation functions
         function showMainContent() {
@@ -1638,6 +1706,11 @@ dan marino = ujicoba web site</p>
             
             // Show main content
             document.querySelector('main').style.display = 'block';
+            // Pastikan semua section utama terlihat
+            document.querySelectorAll('.main-page-content').forEach(section => {
+                section.classList.remove('hidden');
+            });
+            document.getElementById('sejarah').classList.add('hidden');
             document.querySelector('footer').style.display = 'block';
             
             // Scroll to top
