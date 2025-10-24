@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Koding Pro | Belajar Koding dari Nol hingga Mahir</title>
+    
+    <!-- Meta Tags for SEO and Social Sharing -->
+    <meta name="description" content="Platform #1 untuk belajar koding dari dasar hingga mahir dengan kurikulum modern. Kuasai HTML, CSS, JavaScript, Python, dan React secara gratis.">
+    <meta name="author" content="Panduan Koding">
+    <meta property="og:title" content="Panduan Koding Pro | Belajar Koding dari Nol hingga Mahir">
+    <meta property="og:description" content="Platform #1 untuk belajar koding dari dasar hingga mahir. Kuasai HTML, CSS, JavaScript, Python, dan React secara gratis.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://placehold.co/1200x630/0A0A0A/E0E0E0?text=Panduan\nKoding_Pro">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <style>
+        /* Custom Styles for Framer-like feel */
+        :root {
+            --background: #f8f9fa; /* Off-white */
+            --text-primary: #212529; /* Dark Gray */
+            --text-secondary: #6c757d; /* Medium Gray */
+            --card-bg: rgba(255, 255, 255, 0.6); /* White with transparency */
+            --border-color: rgba(0, 0, 0, 0.08); /* Light black border */
+        }
+
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+        }
+
+        /* Spotlight effect on Hero */
+        .spotlight-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        .spotlight-effect::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(45, 83, 255, 0.15), transparent 60%);
+            transform: translate(-50%, -50%);
+            animation: pulse 8s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+        }
+
+        /* Custom gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #4F46E5, #A78BFA, #EC4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glassmorphism effect for cards and nav */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 0, 0, 0.12);
+        }
+        
+        .nav-glass {
+            background: rgba(248, 249, 250, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Animated gradient border on button hover */
+        .btn-gradient-border {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .btn-gradient-border::before {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            top: -2px; left: -2px;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            background: conic-gradient(from 180deg at 50% 50%, #4F46E5, #A78BFA, #EC4899, #4F46E5);
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.3s;
+            animation: rotate-gradient 4s linear infinite;
+        }
+        .btn-gradient-border:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes rotate-gradient {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Matrix Canvas Style */
+        #matrix-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3; /* Opasitas ditingkatkan agar animasi matrix lebih terlihat */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Container for all content -->
+    <div class="relative z-10">
+
+        <!-- Header / Navigation -->
+        <header class="nav-glass sticky top-0 z-50">
+            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="#" onclick="showMainContent(); return false;" class="text-2xl font-bold tracking-tighter">
+                    Panduan<span class="gradient-text">Koding</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8 font-medium">
+                    <a href="#pilih-proyek" class="text-gray-600 hover:text-black transition-colors duration-300">Proyek</a>
+                    <a href="#kurikulum" class="text-gray-600 hover:text-black transition-colors duration-300">Kurikulum</a>
+                    <a href="#fitur" class="text-gray-600 hover:text-black transition-colors duration-300">Fitur</a>
+                    <a href="#ulasan" class="text-gray-600 hover:text-black transition-colors duration-300">Ulasan</a>
+                </div>
+                <a href="#pilih-proyek" class="bg-white text-black font-semibold px-5 py-2 rounded-lg hover:bg-gray-200 transition-colors duration-300 transform hover:scale-105">
+                    Mulai Belajar
+                </a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Hero Section -->
+            <section class="spotlight-effect py-24 md:py-32">
+                <!-- Canvas untuk animasi matrix -->
+                <canvas id="matrix-canvas"></canvas>
+                <div class="container mx-auto px-6 text-center relative z-10">
+                    <div class="mb-4 inline-block bg-white/50 border border-gray-200/50 rounded-full px-4 py-1 text-sm">
+                        <span class="gradient-text font-semibold">✨ Platform Belajar Koding #1 di Indonesia</span>
+                    </div>
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter mb-6 text-gray-900 leading-tight">
+                        Dari Nol Menjadi <br class="hidden md:block"> Profesional <span class="gradient-text">Developer</span>
+                    </h1>
+                    <p class="max-w-2xl mx-auto text-lg md:text-xl text-gray-600 mb-10">
+                        Kurikulum modern yang dirancang untuk membawamu menguasai skill paling dicari di industri teknologi. Belajar HTML, CSS, JavaScript, Python dan React secara gratis.
+                    </p>
+                    <div class="flex justify-center items-center gap-4">
+                        <a href="#pilih-proyek" class="bg-indigo-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-indigo-600/30">
+                            Jelajahi Proyek
+                        </a>
+                        <a href="#ulasan" class="bg-white/50 border border-gray-200/50 text-gray-800 font-semibold px-8 py-3 rounded-lg hover:bg-white/80 transition-colors duration-300">
+                            Lihat Ulasan
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Project Selection Section -->
+            <section id="pilih-proyek" class="py-20 md:py-28">
+                <div class="container mx-auto px-6">
+                    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                        <h2 class="text-3xl md:text-5xl font-bold tracking-tighter mb-4 text-gray-900">Kamu Ingin Belajar <span class="gradient-text">Apa?</span></h2>
+                        <p class="text-lg text-gray-600">
+                            Pilih proyek yang ingin kamu bangun. Kami akan pandu langkah demi langkah, mulai dari HTML, CSS, hingga JavaScript.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="glass-card p-8 rounded-2xl text-center hover:-translate-y-2 transition-transform duration-300 reveal cursor-pointer" onclick="showProjectLanding('notepad')">
+                            <div class="w-20 h-20 bg-red-500/10 border border-red-500/20 text-red-500 flex items-center justify-center rounded-xl mx-auto mb-6">
+                                <i data-feather="file-text" class="w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 text-gray-900">Notepad</h3>
+                            <p class="text-gray-600">Aplikasi sederhana untuk menulis dan menyimpan catatan.</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl text-center hover:-translate-y-2 transition-transform duration-300 reveal cursor-pointer" style="transition-delay: 100ms;" onclick="showProjectLanding('todo')">
+                            <div class="w-20 h-20 bg-green-500/10 border border-green-500/20 text-green-400 flex items-center justify-center rounded-xl mx-auto mb-6">
+                                <i data-feather="check-square" class="w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 text-gray-900">To-Do List</h3>
+                            <p class="text-gray-600">Kelola tugas harianmu dengan aplikasi daftar kerja.</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl text-center hover:-translate-y-2 transition-transform duration-300 reveal cursor-pointer" style="transition-delay: 200ms;" onclick="showProjectLanding('tictactoe')">
+                            <div class="w-20 h-20 bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center rounded-xl mx-auto mb-6">
+                                <i data-feather="grid" class="w-10 h-10"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 text-gray-900">Tic-Tac-Toe</h3>
+                            <p class="text-gray-600">Bangun game klasik untuk dua pemain ini.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Curriculum Section -->
+            <section id="kurikulum" class="py-20 md:py-28">
+                <div class="container mx-auto px-6">
+                    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                        <h2 class="text-3xl md:text-5xl font-bold tracking-tighter mb-4 text-gray-900">Kurikulum Terstruktur</h2>
+                        <p class="text-lg text-gray-600">
+                            Lima pilar utama pengembangan teknologi, dari fondasi web hingga backend dan data science.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+                        <!-- Card Template -->
+                        <div class="glass-card p-8 rounded-2xl flex flex-col items-start hover:-translate-y-2 transition-transform duration-300 reveal cursor-pointer" onclick="showTutorial('html-page')">
+                            <div class="w-16 h-16 bg-red-500/10 border border-red-500/20 text-red-500 flex items-center justify-center rounded-xl mb-6">
+                                <i data-feather="code" class="w-8 h-8"></i>
+                            </div>
+                            <span class="text-xs font-semibold bg-red-100 text-red-800 px-3 py-1 rounded-full mb-3">Pemula</span>
+                            <h3 class="text-2xl font-bold mb-3 text-gray-900">HTML</h3>
+                            <p class="text-gray-600 flex-grow">Pelajari kerangka dan struktur dasar setiap halaman web.</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl flex flex-col items-start hover:-translate-y-2 transition-transform duration-300 reveal cursor-pointer" style="transition-delay: 100ms;" onclick="showTutorial('css-page')">
+                            <div class="w-16 h-16 bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center rounded-xl mb-6">
+                                <i data-feather="pen-tool" class="w-8 h-8"></i>
+                            </div>
+                             <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-3 py-1 rounded-full mb-3">Pemula</span>
+                            <h3 class="text-2xl font-bold mb-3 text-gray-900">CSS</h3>
+                            <p class="text-gray-600 flex-grow">Hias dan desain website Anda menjadi karya seni visual yang menarik.</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl flex flex-col items-start hover:-translate-y-2 transition-transform duration-300 reveal cursor-pointer" style="transition-delay: 200ms;" onclick="showTutorial('js-page')">
+                            <div class="w-16 h-16 bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center rounded-xl mb-6">
+                                <i data-feather="zap" class="w-8 h-8"></i>
+                            </div>
+                            <span class="text-xs font-semibold bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full mb-3">Menengah</span>
+                            <h3 class="text-2xl font-bold mb-3 text-gray-900">JavaScript</h3>
+                            <p class="text-gray-600 flex-grow">Tambahkan interaktivitas dan logika untuk menghidupkan website Anda.</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl flex flex-col items-start hover:-translate-y-2 transition-transform duration-300 reveal cursor-pointer" style="transition-delay: 300ms;" onclick="showTutorial('react-page')">
+                            <div class="w-16 h-16 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center rounded-xl mb-6">
+                                <i data-feather="box" class="w-8 h-8"></i>
+                            </div>
+                            <span class="text-xs font-semibold bg-cyan-100 text-cyan-800 px-3 py-1 rounded-full mb-3">Lanjutan</span>
+                            <h3 class="text-2xl font-bold mb-3 text-gray-900">React</h3>
+                            <p class="text-gray-600 flex-grow">Bangun aplikasi web modern, cepat, dan berskala besar.</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl flex flex-col items-start hover:-translate-y-2 transition-transform duration-300 reveal cursor-pointer" style="transition-delay: 400ms;" onclick="showTutorial('python-page')">
+                            <div class="w-16 h-16 bg-green-500/10 border border-green-500/20 text-green-400 flex items-center justify-center rounded-xl mb-6">
+                                <i data-feather="terminal" class="w-8 h-8"></i>
+                            </div>
+                            <span class="text-xs font-semibold bg-green-100 text-green-800 px-3 py-1 rounded-full mb-3">Menengah</span>
+                            <h3 class="text-2xl font-bold mb-3 text-gray-900">Python</h3>
+                            <p class="text-gray-600 flex-grow">Kuasai bahasa serbaguna untuk backend, data science, dan automasi.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Features Section -->
+            <section id="fitur" class="py-20 md:py-28">
+                 <div class="container mx-auto px-6">
+                    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                        <h2 class="text-3xl md:text-5xl font-bold tracking-tighter mb-4 text-gray-900">Kenapa <span class="gradient-text">PanduanKoding?</span></h2>
+                        <p class="text-lg text-gray-600">
+                            Kami menyediakan lebih dari sekadar tutorial. Kami memberikan pengalaman belajar yang lengkap dan modern.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="glass-card p-8 rounded-xl text-center reveal">
+                            <i data-feather="book-open" class="w-12 h-12 mx-auto mb-4 text-purple-400"></i>
+                            <h3 class="text-xl font-bold mb-2 text-gray-900">Materi Mendalam</h3>
+                            <p class="text-gray-600">Tutorial dari dasar hingga mahir dengan contoh praktis dan relevan dengan industri.</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-xl text-center reveal" style="transition-delay: 200ms;">
+                            <i data-feather="award" class="w-12 h-12 mx-auto mb-4 text-green-400"></i>
+                            <h3 class="text-xl font-bold mb-2 text-gray-900">Mudah Dipahami</h3>
+                            <p class="text-gray-600">Penjelasan sederhana dan visualisasi yang jelas untuk konsep yang kompleks.</p>
+                        </div>
+                         <div class="glass-card p-8 rounded-xl text-center reveal" style="transition-delay: 400ms;">
+                            <i data-feather="gift" class="w-12 h-12 mx-auto mb-4 text-pink-400"></i>
+                            <h3 class="text-xl font-bold mb-2 text-gray-900">100% Gratis</h3>
+                            <p class="text-gray-600">Akses semua materi selamanya tanpa biaya tersembunyi. Pendidikan untuk semua.</p>
+                        </div>
+                    </div>
+                 </div>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section id="ulasan" class="py-20 md:py-28 spotlight-effect">
+                <div class="container mx-auto px-6 relative z-10">
+                    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                        <h2 class="text-3xl md:text-5xl font-bold tracking-tighter mb-4 text-gray-900">Apa Kata Mereka?</h2>
+                        <p class="text-lg text-gray-600">
+                            Ribuan developer telah memulai karir mereka bersama kami. Lihat cerita sukses mereka.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Review Card Template -->
+                        <div class="glass-card p-6 rounded-xl reveal">
+                            <div class="flex items-center mb-4">
+                                <img src="https://i.pravatar.cc/40?u=a" alt="User Avatar" class="w-10 h-10 rounded-full mr-3 border-2 border-gray-600">
+                                <div>
+                                    <p class="font-semibold text-gray-900">Sarah L.</p>
+                                    <p class="text-xs text-gray-500">Mahasiswi IT</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700">"Penjelasan HTML-nya sangat ramah pemula! Saya yang awalnya buta coding jadi paham struktur web dalam sehari."</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl reveal" style="transition-delay: 100ms;">
+                            <div class="flex items-center mb-4">
+                                <img src="https://i.pravatar.cc/40?u=b" alt="User Avatar" class="w-10 h-10 rounded-full mr-3 border-2 border-gray-600">
+                                <div>
+                                    <p class="font-semibold text-gray-900">Budi Santoso</p>
+                                    <p class="text-xs text-gray-500">UI/UX Designer</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700">"Materi CSS-nya keren banget, terutama bagian Flexbox dan Grid. Sangat membantu saya menerjemahkan desain ke kode."</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl reveal" style="transition-delay: 200ms;">
+                            <div class="flex items-center mb-4">
+                                <img src="https://i.pravatar.cc/40?u=c" alt="User Avatar" class="w-10 h-10 rounded-full mr-3 border-2 border-gray-600">
+                                <div>
+                                    <p class="font-semibold text-gray-900">Rina Hartati</p>
+                                    <p class="text-xs text-gray-500">Fresh Graduate</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700">"Belajar JavaScript di sini membuat logika saya terasah. Contoh-contoh studi kasusnya relevan dan mudah dimengerti."</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl reveal" style="transition-delay: 300ms;">
+                            <div class="flex items-center mb-4">
+                                <img src="https://i.pravatar.cc/40?u=d" alt="User Avatar" class="w-10 h-10 rounded-full mr-3 border-2 border-gray-600">
+                                <div>
+                                    <p class="font-semibold text-gray-900">David Chen</p>
+                                    <p class="text-xs text-gray-500">Frontend Developer</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700">"Panduan React-nya sangat up-to-date. Penjelasan tentang Hooks dan State Management sangat membantu pekerjaan saya."</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl reveal">
+                            <div class="flex items-center mb-4">
+                                <img src="https://i.pravatar.cc/40?u=e" alt="User Avatar" class="w-10 h-10 rounded-full mr-3 border-2 border-gray-600">
+                                <div>
+                                    <p class="font-semibold text-gray-900">Ahmad Faiz</p>
+                                    <p class="text-xs text-gray-500">Pelajar SMK</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700">"Gratis tapi kualitasnya premium. Ini platform terbaik untuk pelajar seperti saya yang ingin belajar coding tanpa biaya."</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl reveal" style="transition-delay: 100ms;">
+                            <div class="flex items-center mb-4">
+                                <img src="https://i.pravatar.cc/40?u=f" alt="User Avatar" class="w-10 h-10 rounded-full mr-3 border-2 border-gray-600">
+                                <div>
+                                    <p class="font-semibold text-gray-900">Citra Ayu</p>
+                                    <p class="text-xs text-gray-500">Career Shifter</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700">"Berkat PanduanKoding, saya berhasil pindah karir menjadi web developer. Materinya sangat terstruktur dan aplikatif."</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl reveal" style="transition-delay: 200ms;">
+                            <div class="flex items-center mb-4">
+                                <img src="https://i.pravatar.cc/40?u=g" alt="User Avatar" class="w-10 h-10 rounded-full mr-3 border-2 border-gray-600">
+                                <div>
+                                    <p class="font-semibold text-gray-900">Eko Prasetyo</p>
+                                    <p class="text-xs text-gray-500">Wiraswasta</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700">"Materi Python-nya membantu saya membuat skrip automasi untuk bisnis. Sangat bermanfaat di luar web development."</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl reveal" style="transition-delay: 300ms;">
+                            <div class="flex items-center mb-4">
+                                <img src="https://i.pravatar.cc/40?u=h" alt="User Avatar" class="w-10 h-10 rounded-full mr-3 border-2 border-gray-600">
+                                <div>
+                                    <p class="font-semibold text-gray-900">Lina Wijaya</p>
+                                    <p class="text-xs text-gray-500">Fullstack Developer</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700">"Sebagai referensi, saya sering kembali ke sini untuk menyegarkan ingatan. Kontennya solid dan to the point."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- CTA Section -->
+            <section class="py-20 md:py-28">
+                <div class="container mx-auto px-6">
+                    <div class="bg-gray-900 rounded-2xl p-8 md:p-16 text-center reveal btn-gradient-border">
+                         <h2 class="text-3xl md:text-5xl font-bold tracking-tighter mb-4 text-white">
+                            Siap Memulai Karir <span class="gradient-text">Impianmu?</span>
+                        </h2>
+                        <p class="max-w-xl mx-auto text-lg text-gray-300 mb-8">
+                            Waktu terbaik untuk memulai adalah sekarang. Bergabunglah dengan ribuan developer sukses lainnya hari ini.
+                        </p>
+                        <a href="#pilih-proyek" class="bg-indigo-600 text-white font-semibold px-8 py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-indigo-600/30 text-lg">
+                            Mulai Belajar Gratis
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Tutorial Pages Container -->
+        <div id="tutorial-pages">
+            <!-- Project Landing Pages -->
+            <div id="notepad-landing-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showMainContent(); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Pilihan Proyek
+                        </a>
+                        <div class="text-center mb-12">
+                            <div class="w-24 h-24 bg-red-500/10 border border-red-500/20 text-red-500 flex items-center justify-center rounded-xl mx-auto mb-6">
+                                <i data-feather="file-text" class="w-12 h-12"></i>
+                            </div>
+                            <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 mb-4">Proyek: Notepad</h1>
+                            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Aplikasi sederhana untuk menulis, menyimpan, dan menghapus catatan. Cocok untuk memahami dasar manipulasi DOM dan penyimpanan data di browser.</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="glass-card p-6 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300 cursor-pointer" onclick="showTutorial('notepad-html-page')">
+                                <h3 class="text-xl font-bold mb-2 text-red-400">1. HTML</h3>
+                                <p class="text-gray-600">Bangun struktur kerangka aplikasi notepad.</p>
+                            </div>
+                            <div class="glass-card p-6 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300 cursor-pointer" onclick="showTutorial('notepad-css-page')">
+                                <h3 class="text-xl font-bold mb-2 text-blue-400">2. CSS</h3>
+                                <p class="text-gray-600">Hias tampilan notepad agar menarik dan nyaman digunakan.</p>
+                            </div>
+                            <div class="glass-card p-6 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300 cursor-pointer" onclick="showTutorial('notepad-js-page')">
+                                <h3 class="text-xl font-bold mb-2 text-yellow-400">3. JavaScript</h3>
+                                <p class="text-gray-600">Tambahkan logika untuk membuat, menyimpan, dan menghapus catatan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="todo-landing-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showMainContent(); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Pilihan Proyek
+                        </a>
+                        <div class="text-center mb-12">
+                            <div class="w-24 h-24 bg-green-500/10 border border-green-500/20 text-green-400 flex items-center justify-center rounded-xl mx-auto mb-6">
+                                <i data-feather="check-square" class="w-12 h-12"></i>
+                            </div>
+                            <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 mb-4">Proyek: To-Do List</h1>
+                            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Aplikasi untuk mengelola daftar tugas. Kamu akan belajar cara menambah, menyelesaikan, dan menghapus tugas, serta menyimpannya secara lokal.</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="glass-card p-6 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300 cursor-pointer" onclick="showTutorial('todo-html-page')">
+                                <h3 class="text-xl font-bold mb-2 text-red-400">1. HTML</h3>
+                                <p class="text-gray-600">Buat form input dan daftar untuk menampilkan tugas.</p>
+                            </div>
+                            <div class="glass-card p-6 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300 cursor-pointer" onclick="showTutorial('todo-css-page')">
+                                <h3 class="text-xl font-bold mb-2 text-blue-400">2. CSS</h3>
+                                <p class="text-gray-600">Desain tampilan yang jelas dan beri gaya pada tugas yang selesai.</p>
+                            </div>
+                            <div class="glass-card p-6 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300 cursor-pointer" onclick="showTutorial('todo-js-page')">
+                                <h3 class="text-xl font-bold mb-2 text-yellow-400">3. JavaScript</h3>
+                                <p class="text-gray-600">Buat fungsi untuk menambah, mencentang, dan menghapus tugas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="tictactoe-landing-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showMainContent(); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Pilihan Proyek
+                        </a>
+                        <div class="text-center mb-12">
+                            <div class="w-24 h-24 bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center rounded-xl mx-auto mb-6">
+                                <i data-feather="grid" class="w-12 h-12"></i>
+                            </div>
+                            <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 mb-4">Proyek: Tic-Tac-Toe</h1>
+                            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Game klasik untuk dua pemain. Proyek ini sangat bagus untuk memahami logika kondisional, manajemen state, dan manipulasi array.</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="glass-card p-6 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300 cursor-pointer" onclick="showTutorial('tictactoe-html-page')">
+                                <h3 class="text-xl font-bold mb-2 text-red-400">1. HTML</h3>
+                                <p class="text-gray-600">Buat papan permainan 3x3 dan elemen informasi status.</p>
+                            </div>
+                            <div class="glass-card p-6 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300 cursor-pointer" onclick="showTutorial('tictactoe-css-page')">
+                                <h3 class="text-xl font-bold mb-2 text-blue-400">2. CSS</h3>
+                                <p class="text-gray-600">Buat tampilan papan yang rapi dan gaya untuk simbol X dan O.</p>
+                            </div>
+                            <div class="glass-card p-6 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300 cursor-pointer" onclick="showTutorial('tictactoe-js-page')">
+                                <h3 class="text-xl font-bold mb-2 text-yellow-400">3. JavaScript</h3>
+                                <p class="text-gray-600">Tulis logika permainan: giliran, cek menang, dan reset game.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- NOTEPAD TUTORIALS -->
+            <div id="notepad-html-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showProjectLanding('notepad'); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Proyek Notepad
+                        </a>
+                        <div class="flex items-center gap-6 mb-12">
+                            <div class="w-20 h-20 bg-red-500/10 border border-red-500/20 text-red-500 flex items-center justify-center rounded-xl flex-shrink-0">
+                                <i data-feather="code" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">Notepad: Struktur HTML</h1>
+                                <p class="text-lg text-gray-600 mt-2">Membangun kerangka dasar aplikasi notepad dengan elemen form dan wadah untuk catatan.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-8 rounded-xl">
+                            <h3 class="text-2xl font-bold mb-3">Kode Lengkap: index.html</h3>
+                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file bernama <code>index.html</code>. Struktur ini mencakup header, formulir untuk membuat catatan baru, dan area untuk menampilkan daftar catatan.</p>
+                            <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Aplikasi Notepad&lt;/title&gt;
+    &lt;!-- CSS akan ditautkan di sini --&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;header&gt;
+            &lt;h1&gt;Aplikasi Notepad Sederhana&lt;/h1&gt;
+        &lt;/header&gt;
+        
+        &lt;main&gt;
+            &lt;section class="note-form"&gt;
+                &lt;h2&gt;Buat Catatan Baru&lt;/h2&gt;
+                &lt;!-- Form untuk input judul dan isi catatan --&gt;
+                &lt;form id="note-form"&gt;
+                    &lt;div class="form-group"&gt;
+                        &lt;label for="note-title"&gt;Judul Catatan&lt;/label&gt;
+                        &lt;input type="text" id="note-title" placeholder="Masukkan judul catatan" required&gt;
+                    &lt;/div&gt;
+                    &lt;div class="form-group"&gt;
+                        &lt;label for="note-content"&gt;Isi Catatan&lt;/label&gt;
+                        &lt;textarea id="note-content" placeholder="Tulis catatan Anda di sini" required&gt;&lt;/textarea&gt;
+                    &lt;/div&gt;
+                    &lt;button type="submit" class="btn"&gt;Simpan Catatan&lt;/button&gt;
+                &lt;/form&gt;
+            &lt;/section&gt;
+            
+            &lt;section class="notes-list"&gt;
+                &lt;h2&gt;Daftar Catatan&lt;/h2&gt;
+                &lt;!-- Wadah untuk menampilkan catatan yang sudah dibuat --&gt;
+                &lt;div id="notes-container"&gt;
+                    &lt;p class="empty-state"&gt;Belum ada catatan. Buat catatan baru!&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/section&gt;
+        &lt;/main&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- JavaScript akan ditautkan di sini --&gt;
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                            </div>
+                            <div class="mt-6">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Elemen Penting:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                    <li><code>&lt;form id="note-form"&gt;</code>: Formulir yang akan menangani input pengguna. Atribut <code>id</code> penting agar bisa diakses oleh JavaScript.</li>
+                                    <li><code>&lt;label for="..."&gt;</code>: Label untuk meningkatkan aksesibilitas dan keterhubungan dengan input.</li>
+                                    <li><code>&lt;input type="text" id="note-title"&gt;</code>: Input teks satu baris untuk judul. <code>id</code> digunakan JavaScript untuk mengambil nilainya.</li>
+                                    <li><code>&lt;textarea id="note-content"&gt;</code>: Area teks multi-baris untuk isi catatan.</li>
+                                    <li><code>&lt;button type="submit"&gt;</code>: Tombol untuk mengirimkan formulir.</li>
+                                    <li><code>&lt;div id="notes-container"&gt;</code>: Wadah kosong yang akan diisi oleh catatan-catatan secara dinamis menggunakan JavaScript.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="notepad-css-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showProjectLanding('notepad'); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Proyek Notepad
+                        </a>
+                        <div class="flex items-center gap-6 mb-12">
+                            <div class="w-20 h-20 bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center rounded-xl flex-shrink-0">
+                                <i data-feather="pen-tool" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">Notepad: Styling CSS</h1>
+                                <p class="text-lg text-gray-600 mt-2">Memberikan tampilan yang menarik dan nyaman pada aplikasi notepad dengan CSS.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-8 rounded-xl">
+                            <h3 class="text-2xl font-bold mb-3">Kode Lengkap: style.css</h3>
+                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file bernama <code>style.css</code> di folder yang sama dengan <code>index.html</code>. Kode ini akan memberikan warna, layout, dan efek interaktif pada aplikasi.</p>
+                            <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>/* Reset dan Gaya Umum */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #3498db;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+}
+
+/* Form Catatan */
+.note-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+/* Daftar Catatan */
+.notes-list {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.note-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.note-item:last-child {
+    border-bottom: none;
+}
+
+.note-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.note-content {
+    margin-bottom: 10px;
+    white-space: pre-wrap; /* Mempertahankan spasi dan baris baru */
+}
+
+.note-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.note-actions button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-left: 5px;
+}
+
+.note-actions button:hover {
+    background-color: #c0392b;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 20px;
+    color: #7f8c8d;
+}</code></pre>
+                            </div>
+                            <div class="mt-6">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Gaya Penting:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                    <li><code>box-sizing: border-box;</code>: Memastikan padding dan border tidak menambah ukuran total elemen.</li>
+                                    <li><code>.container</code>: Membatasi lebar konten dan menengahkannya.</li>
+                                    <li><code>box-shadow</code>: Memberikan efek bayangan pada form dan daftar catatan untuk kesan "mengambang".</li>
+                                    <li><code>white-space: pre-wrap;</code>: Penting untuk <code>&lt;textarea&gt;</code> agar teks tetap mempertahankan formatnya (spasi dan baris baru).</li>
+                                    <li><code>transition</code>: Membuat perubahan warna pada tombol menjadi halus saat hover.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="notepad-js-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showProjectLanding('notepad'); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Proyek Notepad
+                        </a>
+                        <div class="flex items-center gap-6 mb-12">
+                            <div class="w-20 h-20 bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center rounded-xl flex-shrink-0">
+                                <i data-feather="zap" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">Notepad: Logika JavaScript</h1>
+                                <p class="text-lg text-gray-600 mt-2">Menghidupkan aplikasi notepad dengan fungsi untuk menambah, menampilkan, dan menghapus catatan, serta menyimpannya di browser.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-8 rounded-xl">
+                            <h3 class="text-2xl font-bold mb-3">Kode Lengkap: script.js</h3>
+                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file bernama <code>script.js</code>. Kode ini mengatur semua interaktivitas aplikasi.</p>
+                            <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>// Tunggu hingga seluruh konten HTML dimuat
+document.addEventListener('DOMContentLoaded', function() {
+    // Mendapatkan elemen-elemen yang diperlukan dari DOM
+    const noteForm = document.getElementById('note-form');
+    const noteTitle = document.getElementById('note-title');
+    const noteContent = document.getElementById('note-content');
+    const notesContainer = document.getElementById('notes-container');
+    
+    // Mengambil catatan yang tersimpan di localStorage, atau buat array kosong jika tidak ada
+    let notes = JSON.parse(localStorage.getItem('notes')) || [];
+    
+    // Menampilkan catatan yang ada saat halaman dimuat
+    displayNotes();
+    
+    // Event listener untuk saat formulir disubmit
+    noteForm.addEventListener('submit', function(e) {
+        // Mencegah perilaku default form (reload halaman)
+        e.preventDefault();
+        
+        // Membuat objek catatan baru
+        const newNote = {
+            id: Date.now(), // ID unik menggunakan timestamp
+            title: noteTitle.value,
+            content: noteContent.value,
+            createdAt: new Date().toLocaleString()
+        };
+        
+        // Menambahkan catatan baru ke array 'notes'
+        notes.push(newNote);
+        
+        // Menyimpan array 'notes' ke localStorage
+        saveNotes();
+        
+        // Memperbarui tampilan daftar catatan
+        displayNotes();
+        
+        // Mengosongkan form setelah catatan disimpan
+        noteForm.reset();
+    });
+    
+    // Fungsi untuk menampilkan semua catatan ke dalam DOM
+    function displayNotes() {
+        // Mengosongkan container terlebih dahulu
+        notesContainer.innerHTML = '';
+        
+        // Jika tidak ada catatan, tampilkan pesan
+        if (notes.length === 0) {
+            notesContainer.innerHTML = '&lt;p class="empty-state"&gt;Belum ada catatan. Buat catatan baru!&lt;/p&gt;';
+            return;
+        }
+        
+        // Loop melalui setiap catatan dan buat elemen HTML untuknya
+        notes.forEach(note => {
+            const noteElement = document.createElement('div');
+            noteElement.classList.add('note-item');
+            
+            noteElement.innerHTML = `
+                &lt;h3 class="note-title"&gt;${note.title}&lt;/h3&gt;
+                &lt;p class="note-content"&gt;${note.content}&lt;/p&gt;
+                &lt;p class="note-date"&gt;Dibuat: ${note.createdAt}&lt;/p&gt;
+                &lt;div class="note-actions"&gt;
+                    &lt;button class="delete-btn" data-id="${note.id}"&gt;Hapus&lt;/button&gt;
+                &lt;/div&gt;
+            `;
+            
+            // Menambahkan elemen catatan ke container
+            notesContainer.appendChild(noteElement);
+        });
+        
+        // Menambahkan event listener untuk setiap tombol hapus
+        const deleteButtons = document.querySelectorAll('.delete-btn');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Mendapatkan ID catatan dari atribut data-id
+                const noteId = parseInt(this.getAttribute('data-id'));
+                deleteNote(noteId);
+            });
+        });
+    }
+    
+    // Fungsi untuk menghapus catatan berdasarkan ID
+    function deleteNote(id) {
+        // Filter array 'notes' untuk menghapus catatan dengan ID yang sesuai
+        notes = notes.filter(note => note.id !== id);
+        
+        // Simpan perubahan ke localStorage
+        saveNotes();
+        
+        // Perbarui tampilan
+        displayNotes();
+    }
+    
+    // Fungsi untuk menyimpan array 'notes' ke localStorage
+    function saveNotes() {
+        // localStorage hanya bisa menyimpan string, jadi kita ubah array menjadi string JSON
+        localStorage.setItem('notes', JSON.stringify(notes));
+    }
+});</code></pre>
+                            </div>
+                            <div class="mt-6">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Logika Penting:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                    <li><code>DOMContentLoaded</code>: Memastikan kode JavaScript berjalan hanya setelah seluruh halaman HTML siap.</li>
+                                    <li><code>localStorage</code>: Fitur browser untuk menyimpan data secara lokal. Data akan tetap ada bahkan setelah browser ditutup. <code>JSON.stringify</code> dan <code>JSON.parse</code> digunakan karena localStorage hanya bisa menyimpan teks.</li>
+                                    <li><code>addEventListener('submit', ...)</code>: Menangkap event saat tombol "Simpan" ditekan. <code>e.preventDefault()</code> mencegah halaman refresh.</li>
+                                    <li><code>document.createElement</code> dan <code>innerHTML</code>: Cara JavaScript membuat dan menambahkan elemen HTML baru ke halaman secara dinamis.</li>
+                                    <li><code>data-id</code>: Atribut khusus HTML untuk menyimpan data (dalam hal ini ID catatan) pada elemen, memudahkan akses dari JavaScript.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- TODO TUTORIALS -->
+            <div id="todo-html-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showProjectLanding('todo'); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Proyek To-Do List
+                        </a>
+                        <div class="flex items-center gap-6 mb-12">
+                            <div class="w-20 h-20 bg-red-500/10 border border-red-500/20 text-red-500 flex items-center justify-center rounded-xl flex-shrink-0">
+                                <i data-feather="code" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">To-Do List: Struktur HTML</h1>
+                                <p class="text-lg text-gray-600 mt-2">Membangun kerangka aplikasi daftar tugas dengan form input dan wadah untuk daftar tugas.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-8 rounded-xl">
+                            <h3 class="text-2xl font-bold mb-3">Kode Lengkap: index.html</h3>
+                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file <code>index.html</code>. Struktur ini mencakup header, form untuk menambah tugas baru, dan daftar tak berurut (<code>&lt;ul&gt;</code>) untuk menampung tugas.</p>
+                            <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Aplikasi To-Do List&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;header&gt;
+            &lt;h1&gt;Daftar Tugasku&lt;/h1&gt;
+        &lt;/header&gt;
+        
+        &lt;main&gt;
+            &lt;section class="task-input"&gt;
+                &lt;form id="task-form"&gt;
+                    &lt;input type="text" id="task-input" placeholder="Apa yang ingin kamu kerjakan?" required&gt;
+                    &lt;button type="submit"&gt;Tambah Tugas&lt;/button&gt;
+                &lt;/form&gt;
+            &lt;/section&gt;
+            
+            &lt;section class="task-list"&gt;
+                &lt;h2&gt;Tugas Anda&lt;/h2&gt;
+                &lt;!-- Daftar tugas akan dimasukkan ke sini oleh JavaScript --&gt;
+                &lt;ul id="task-ul"&gt;
+                    &lt;!-- Contoh item tugas statis (bisa dihapus nanti) --&gt;
+                    &lt;!-- &lt;li&gt;Belajar JavaScript&lt;button&gt;Hapus&lt;/button&gt;&lt;/li&gt; --&gt;
+                &lt;/ul&gt;
+            &lt;/section&gt;
+        &lt;/main&gt;
+    &lt;/div&gt;
+    
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                            </div>
+                            <div class="mt-6">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Elemen Penting:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                    <li><code>&lt;form id="task-form"&gt;</code>: Formulir untuk menambahkan tugas baru.</li>
+                                    <li><code>&lt;input type="text" id="task-input"&gt;</code>: Field input teks untuk memasukkan deskripsi tugas.</li>
+                                    <li><code>&lt;ul id="task-ul"&gt;</code>: Daftar tak berurut (unordered list) yang akan berisi semua item tugas. JavaScript akan menambahkan elemen <code>&lt;li&gt;</code> ke dalamnya.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="todo-css-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showProjectLanding('todo'); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Proyek To-Do List
+                        </a>
+                        <div class="flex items-center gap-6 mb-12">
+                            <div class="w-20 h-20 bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center rounded-xl flex-shrink-0">
+                                <i data-feather="pen-tool" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">To-Do List: Styling CSS</h1>
+                                <p class="text-lg text-gray-600 mt-2">Memberikan tampilan yang bersih dan fungsional pada aplikasi daftar tugas.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-8 rounded-xl">
+                            <h3 class="text-2xl font-bold mb-3">Kode Lengkap: style.css</h3>
+                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file <code>style.css</code>. Kode ini akan mengatur tata letak, warna, dan gaya untuk form dan daftar tugas, termasuk gaya untuk tugas yang sudah selesai.</p>
+                            <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>/* Gaya Umum */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 2rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    text-align: center;
+    color: #4a4a4a;
+    margin-bottom: 1.5rem;
+}
+
+/* Form Input Tugas */
+.task-input form {
+    display: flex;
+    gap: 10px;
+}
+
+#task-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.task-input button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #5c67f2;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.task-input button:hover {
+    background-color: #4a54e1;
+}
+
+/* Daftar Tugas */
+.task-list h2 {
+    color: #4a4a4a;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+#task-ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#task-ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: #f7f7f7;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+#task-ul li:hover {
+    background: #efefef;
+}
+
+#task-ul li.completed {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+#task-ul li button {
+    background: #ff4757;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+#task-ul li button:hover {
+    opacity: 1;
+}</code></pre>
+                            </div>
+                            <div class="mt-6">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Gaya Penting:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                    <li><code>display: flex</code> pada form dan <code>&lt;li&gt;</code>: Digunakan untuk menyusun elemen secara horizontal (input dan tombol, teks dan tombol hapus).</li>
+                                    <li><code>justify-content: space-between</code>: Memberikan jarak antara teks tugas dan tombol hapus.</li>
+                                    <li><code>#task-ul li.completed</code>: Ini adalah kelas yang akan ditambahkan oleh JavaScript ke tugas yang sudah selesai untuk memberikan gaya garis tengah (<code>text-decoration: line-through</code>).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="todo-js-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showProjectLanding('todo'); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Proyek To-Do List
+                        </a>
+                        <div class="flex items-center gap-6 mb-12">
+                            <div class="w-20 h-20 bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center rounded-xl flex-shrink-0">
+                                <i data-feather="zap" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">To-Do List: Logika JavaScript</h1>
+                                <p class="text-lg text-gray-600 mt-2">Mengimplementasikan fungsi untuk menambah, menyelesaikan, menghapus tugas, dan menyimpannya menggunakan localStorage.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-8 rounded-xl">
+                            <h3 class="text-2xl font-bold mb-3">Kode Lengkap: script.js</h3>
+                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file s>script.js</code>. Kode ini mengatur semua logika aplikasi To-Do List.</p>
+                            <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>document.addEventListener('DOMContentLoaded', () => {
+    // Seleksi elemen-elemen DOM
+    const taskForm = document.getElementById('task-form');
+    const taskInput = document.getElementById('task-input');
+    const taskUl = document.getElementById('task-ul');
+
+    // Ambil tugas dari localStorage atau buat array kosong
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+    // Fungsi untuk menyimpan tugas ke localStorage
+    const saveTasks = () => {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    };
+
+    // Fungsi untuk merender daftar tugas
+    const renderTasks = () => {
+        taskUl.innerHTML = ''; // Kosongkan daftar terlebih dahulu
+        tasks.forEach((task, index) => {
+            const li = document.createElement('li');
+            li.textContent = task.text;
+            
+            // Tambahkan kelas 'completed' jika tugas sudah selesai
+            if (task.completed) {
+                li.classList.add('completed');
+            }
+
+            // Buat tombol hapus
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Hapus';
+            deleteButton.addEventListener('click', () => deleteTask(index));
+
+            // Tambahkan event listener untuk menandai tugas selesai
+            li.addEventListener('click', () => toggleTaskComplete(index));
+
+            // Masukkan tombol hapus ke dalam li
+            li.appendChild(deleteButton);
+            // Masukkan li ke dalam ul
+            taskUl.appendChild(li);
+        });
+    };
+
+    // Fungsi untuk menambah tugas baru
+    const addTask = (e) => {
+        e.preventDefault(); // Cegah form dari reload
+        const text = taskInput.value.trim();
+        if (text) {
+            tasks.push({ text, completed: false });
+            taskInput.value = ''; // Kosongkan input
+            saveTasks();
+            renderTasks();
+        }
+    };
+
+    // Fungsi untuk menghapus tugas
+    const deleteTask = (index) => {
+        tasks.splice(index, 1); // Hapus tugas dari array
+        saveTasks();
+        renderTasks();
+    };
+
+    // Fungsi untuk toggle status selesai/tidak selesai
+    const toggleTaskComplete = (index) => {
+        tasks[index].completed = !tasks[index].completed;
+        saveTasks();
+        renderTasks();
+    };
+
+    // Event listener untuk submit form
+    taskForm.addEventListener('submit', addTask);
+
+    // Render tugas saat halaman dimuat pertama kali
+    renderTasks();
+});</code></pre>
+                            </div>
+                            <div class="mt-6">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Logika Penting:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                    <li><code>tasks.push({ text, completed: false })</code>: Menambahkan objek tugas baru ke array. Objek ini menyimpan teks dan status penyelesaian.</li>
+                                    <li><code>toggleTaskComplete(index)</code>: Fungsi ini mengubah nilai boolean <code>completed</code> dari <code>false</code> menjadi <code>true</code> atau sebaliknya saat item tugas diklik.</li>
+                                    <li><code>li.classList.add('completed')</code>: JavaScript secara dinamis menambahkan kelas CSS ke elemen <code>&lt;li&gt;</code> untuk mengubah gayanya.</li>
+                                    <li><code>tasks.splice(index, 1)</code>: Metode array untuk menghapus satu elemen pada posisi <code>index</code> tertentu.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- TIC TAC TOE TUTORIALS -->
+            <div id="tictactoe-html-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showProjectLanding('tictactoe'); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Proyek Tic-Tac-Toe
+                        </a>
+                        <div class="flex items-center gap-6 mb-12">
+                            <div class="w-20 h-20 bg-red-500/10 border border-red-500/20 text-red-500 flex items-center justify-center rounded-xl flex-shrink-0">
+                                <i data-feather="code" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">Tic-Tac-Toe: Struktur HTML</h1>
+                                <p class="text-lg text-gray-600 mt-2">Membangun papan permainan 3x3 dan elemen UI untuk menampilkan status dan mengontrol game.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-8 rounded-xl">
+                            <h3 class="text-2xl font-bold mb-3">Kode Lengkap: index.html</h3>
+                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file <code>index.html</code>. Struktur ini terdiri dari judul, area status, papan permainan, dan tombol untuk memulai ulang.</p>
+                            <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Tic-Tac-Toe&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;section class="game-container"&gt;
+        &lt;h1 class="game-title"&gt;Tic-Tac-Toe&lt;/h1&gt;
+        
+        &lt;!-- Menampilkan status giliran atau hasil game --&gt;
+        &lt;div class="status"&gt;Giliranmu, X&lt;/div&gt;
+        
+        &lt;!-- Papan permainan 3x3 --&gt;
+        &lt;div class="board-container"&gt;
+            &lt;!-- 9 sel untuk papan permainan --&gt;
+            &lt;div class="cell" data-cell-index="0"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-cell-index="1"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-cell-index="2"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-cell-index="3"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-cell-index="4"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-cell-index="5"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-cell-index="6"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-cell-index="7"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-cell-index="8"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;!-- Tombol untuk memulai ulang permainan --&gt;
+        &lt;button class="restart-button"&gt;Main Lagi&lt;/button&gt;
+    &lt;/section&gt;
+    
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                            </div>
+                            <div class="mt-6">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Elemen Penting:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                    <li><code>&lt;div class="status"&gt;</code>: Elemen untuk menampilkan informasi kepada pemain (giliran siapa, menang, atau seri).</li>
+                                    <li><code>&lt;div class="board-container"&gt;</code>: Wadah untuk semua sel papan permainan.</li>
+                                    <li><code>&lt;div class="cell" data-cell-index="..."&gt;</code>: Setiap sel papan. Atribut <code>data-cell-index</code> sangat penting untuk memberikan identitas unik (indeks 0-8) pada setiap sel, yang akan digunakan JavaScript untuk melacak posisi.</li>
+                                    <li><code>&lt;button class="restart-button"&gt;</code>: Tombol untuk mengatur ulang permainan ke kondisi awal.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="tictactoe-css-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showProjectLanding('tictactoe'); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Proyek Tic-Tac-Toe
+                        </a>
+                        <div class="flex items-center gap-6 mb-12">
+                            <div class="w-20 h-20 bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center rounded-xl flex-shrink-0">
+                                <i data-feather="pen-tool" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">Tic-Tac-Toe: Styling CSS</h1>
+                                <p class="text-lg text-gray-600 mt-2">Mendesain papan permainan yang rapi dan memberikan gaya visual untuk simbol X dan O.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-8 rounded-xl">
+                            <h3 class="text-2xl font-bold mb-3">Kode Lengkap: style.css</h3>
+                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file <code>style.css</code>. Kode ini menggunakan CSS Grid untuk membuat papan dan memberikan efek hover pada sel.</p>
+                            <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+.game-container {
+    text-align: center;
+}
+
+.game-title {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.status {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #555;
+}
+
+.board-container {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    margin: 0 auto 1.5rem auto;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    border: 2px solid #333;
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 100px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.cell:hover {
+    background-color: #f0f0f0;
+}
+
+/* Kelas yang akan ditambahkan oleh JavaScript */
+.cell.x {
+    color: #e74c3c; /* Warna untuk X */
+}
+
+.cell.o {
+    color: #3498db; /* Warna untuk O */
+}
+
+.restart-button {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.restart-button:hover {
+    background-color: #27ae60;
+}</code></pre>
+                            </div>
+                            <div class="mt-6">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Gaya Penting:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                    <li><code>display: grid</code>: Metode layout modern yang sangat cocok untuk membuat papan permainan. <code>grid-template-columns: repeat(3, 100px)</code> membuat 3 kolom dengan lebar masing-masing 100px.</li>
+                                    <li><code>line-height: 100px</code>: Digunakan untuk menengahkan teks (X atau O) secara vertikal di dalam sel.</li>
+                                    <li><code>.cell.x</code> dan <code>.cell.o</code>: Ini adalah kelas yang akan ditambahkan oleh JavaScript ke sel untuk memberikan warna berbeda pada simbol X dan O.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="tictactoe-js-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showProjectLanding('tictactoe'); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Proyek Tic-Tac-Toe
+                        </a>
+                        <div class="flex items-center gap-6 mb-12">
+                            <div class="w-20 h-20 bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center rounded-xl flex-shrink-0">
+                                <i data-feather="zap" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">Tic-Tac-Toe: Logika JavaScript</h1>
+                                <p class="text-lg text-gray-600 mt-2">Menulis logika inti permainan: mengatur giliran, menempatkan simbol, memeriksa kondisi menang/seri, dan me-reset game.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-8 rounded-xl">
+                            <h3 class="text-2xl font-bold mb-3">Kode Lengkap: script.js</h3>
+                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file <code>script.js</code>. Ini adalah otak dari permainan Tic-Tac-Toe.</p>
+                            <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>document.addEventListener('DOMContentLoaded', () => {
+    const statusDisplay = document.querySelector('.status');
+    const restartButton = document.querySelector('.restart-button');
+    const cells = document.querySelectorAll('.cell');
+
+    let gameActive = true;
+    let currentPlayer = "X";
+    let gameState = ["", "", "", "", "", "", "", "", ""];
+
+    // Pesan yang akan ditampilkan
+    const winningMessage = () => `Pemain ${currentPlayer} Menang!`;
+    const drawMessage = () => `Permainan Seri!`;
+    const currentPlayerTurn = () => `Giliranmu, ${currentPlayer}`;
+
+    // Kondisi menang (8 kemungkinan)
+    const winningConditions = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+
+    // Fungsi untuk menangani klik pada sel
+    const handleCellPlayed = (clickedCell, clickedCellIndex) => {
+        // Update state dan UI
+        gameState[clickedCellIndex] = currentPlayer;
+        clickedCell.innerHTML = currentPlayer;
+        clickedCell.classList.add(currentPlayer.toLowerCase()); // Tambah kelas untuk styling
+    };
+
+    // Fungsi untuk mengganti pemain
+    const handlePlayerChange = () => {
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+        statusDisplay.innerHTML = currentPlayerTurn();
+    };
+
+    // Fungsi untuk memeriksa hasil permainan
+    const handleResultValidation = () => {
+        let roundWon = false;
+        for (let i = 0; i < winningConditions.length; i++) {
+            const winCondition = winningConditions[i];
+            const a = gameState[winCondition[0]];
+            const b = gameState[winCondition[1]];
+            const c = gameState[winCondition[2]];
+            if (a === '' || b === '' || c === '') {
+                continue; // Lanjut jika ada sel yang kosong
+            }
+            if (a === b && b === c) {
+                roundWon = true;
+                break; // Keluar dari loop jika ada yang menang
+            }
+        }
+
+        if (roundWon) {
+            statusDisplay.innerHTML = winningMessage();
+            gameActive = false;
+            return;
+        }
+
+        // Cek apakah permainan seri
+        const roundDraw = !gameState.includes("");
+        if (roundDraw) {
+            statusDisplay.innerHTML = drawMessage();
+            gameActive = false;
+            return;
+        }
+
+        // Jika belum ada yang menang atau seri, ganti pemain
+        handlePlayerChange();
+    };
+
+    // Fungsi untuk menangani klik pada sel
+    const handleCellClick = (event) => {
+        const clickedCell = event.target;
+        const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
+
+        // Cegah klik jika sel sudah terisi atau game sudah berakhir
+        if (gameState[clickedCellIndex] !== "" || !gameActive) {
+            return;
+        }
+
+        handleCellPlayed(clickedCell, clickedCellIndex);
+        handleResultValidation();
+    };
+
+    // Fungsi untuk me-restart permainan
+    const handleRestartGame = () => {
+        gameActive = true;
+        currentPlayer = "X";
+        gameState = ["", "", "", "", "", "", "", "", ""];
+        statusDisplay.innerHTML = currentPlayerTurn();
+        cells.forEach(cell => {
+            cell.innerHTML = "";
+            cell.classList.remove('x', 'o'); // Hapus kelas styling
+        });
+    };
+
+    // Tambahkan event listener ke setiap sel dan tombol restart
+    cells.forEach(cell => cell.addEventListener('click', handleCellClick));
+    restartButton.addEventListener('click', handleRestartGame);
+});</code></pre>
+                            </div>
+                            <div class="mt-6">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Logika Penting:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                    <li><code>gameState</code>: Array yang menyimpan status setiap sel (kosong, "X", atau "O"). Ini adalah "sumber kebenaran" tunggal untuk kondisi papan.</li>
+                                    <li><code>winningConditions</code>: Array 2D yang berisi semua indeks sel yang membentuk garis kemenangan (3 baris, 3 kolom, 2 diagonal).</li>
+                                    <li><code>handleResultValidation()</code>: Fungsi krusial yang memeriksa apakah ada pemain yang menang dengan mencocokkan <code>gameState</code> dengan <code>winningConditions</code>, atau apakah permainan seri.</li>
+                                    <li><code>gameActive</code>: Variabel boolean untuk mencegah interaksi (seperti mengklik sel) setelah permainan berakhir.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Original Tutorials -->
+            <div id="html-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showMainContent(); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Kurikulum
+                        </a>
+                        <div class="flex items-center gap-6 mb-12">
+                            <div class="w-20 h-20 bg-red-500/10 border border-red-500/20 text-red-500 flex items-center justify-center rounded-xl flex-shrink-0">
+                                <i data-feather="code" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">HTML: Fondasi Web</h1>
+                                <p class="text-lg text-gray-600 mt-2">Kuasai struktur, elemen semantik, formulir, dan media untuk membangun halaman web yang solid.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-8">
+                             <div class="glass-card p-8 rounded-xl">
+                                <h3 class="text-2xl font-bold mb-3">HTML Semantik</h3>
+                                <p class="text-gray-600 mb-4">Gunakan tag yang mendeskripsikan maknanya untuk meningkatkan SEO dan aksesibilitas. Ini adalah praktik terbaik dalam pengembangan web modern.</p>
+                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>&lt;header&gt;
+  &lt;h1&gt;Judul Website&lt;/h1&gt;
+  &lt;nav&gt;...&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;article&gt;
+    &lt;h2&gt;Judul Artikel&lt;/h2&gt;
+    &lt;p&gt;Konten artikel...&lt;/p&gt;
+  &lt;/article&gt;
+&lt;/main&gt;
+&lt;footer&gt;
+  &lt;p&gt;Hak Cipta &copy; 2025&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+                                </div>
+                            </div>
+                            <div class="glass-card p-8 rounded-xl">
+                                <h3 class="text-2xl font-bold mb-3">Formulir Interaktif</h3>
+                                <p class="text-gray-600 mb-4">Pelajari lebih banyak tipe input untuk membuat formulir yang lebih kaya fitur, termasuk validasi bawaan browser.</p>
+                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>&lt;form&gt;
+  &lt;input type="email" placeholder="Email Anda" required&gt;
+  &lt;input type="password" placeholder="Kata Sandi" minlength="8" required&gt;
+  &lt;input type="date"&gt;
+  &lt;input type="checkbox" id="setuju"&gt;
+  &lt;label for="setuju"&gt;Saya setuju dengan syarat.&lt;/label&gt;
+  &lt;button type="submit"&gt;Daftar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                                </div>
+                            </div>
+                             <div class="glass-card p-8 rounded-xl">
+                                <h3 class="text-2xl font-bold mb-3">Multimedia di Web</h3>
+                                <p class="text-gray-600 mb-4">Sematkan audio dan video secara langsung ke halaman Anda menggunakan tag `&lt;audio&gt;` dan `&lt;video&gt;`. Atribut `controls` akan menampilkan kontrol pemutaran standar.</p>
+                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>&lt;!-- Video Player --&gt;
+&lt;video controls width="100%"&gt;
+  &lt;source src="/media/video.mp4" type="video/mp4"&gt;
+  Browser Anda tidak mendukung tag video.
+&lt;/video&gt;
+
+&lt;!-- Audio Player --&gt;
+&lt;audio controls&gt;
+  &lt;source src="/media/audio.mp3" type="audio/mpeg"&gt;
+  Browser Anda tidak mendukung tag audio.
+&lt;/audio&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="css-page" class="tutorial-page hidden">
+                 <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showMainContent(); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                           <i data-feather="arrow-left" class="w-4 h-4"></i>
+                           Kembali ke Kurikulum
+                        </a>
+                        <div class="flex items-center gap-6 mb-12">
+                             <div class="w-20 h-20 bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center rounded-xl flex-shrink-0">
+                                <i data-feather="pen-tool" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">CSS: Seni Desain Web</h1>
+                                <p class="text-lg text-gray-600 mt-2">Dari dasar styling hingga layout modern, animasi, dan desain responsif.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-8">
+                             <div class="glass-card p-8 rounded-xl">
+                                <h3 class="text-2xl font-bold mb-3">Layout Modern: Flexbox & Grid</h3>
+                                <p class="text-gray-600 mb-4">Flexbox sangat baik untuk menyusun item dalam satu dimensi (baris/kolom), sementara Grid adalah raja untuk layout dua dimensi yang kompleks. Menguasai keduanya adalah kunci.</p>
+                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>.flex-container {
+    display: flex;
+    justify-content: space-between; /* Horizontal alignment */
+    align-items: center; /* Vertical alignment */
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}</code></pre>
+                                </div>
+                            </div>
+                             <div class="glass-card p-8 rounded-xl">
+                                <h3 class="text-2xl font-bold mb-3">CSS Variables (Custom Properties)</h3>
+                                <p class="text-gray-600 mb-4">Gunakan variabel untuk menyimpan nilai yang dapat digunakan kembali di seluruh stylesheet Anda. Sangat berguna untuk tema (mis. mode gelap) dan menjaga konsistensi desain.</p>
+                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>:root {
+  --primary-color: #4F46E5;
+  --text-color: #E0E0E0;
+}
+.button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}</code></pre>
+                                </div>
+                            </div>
+                             <div class="glass-card p-8 rounded-xl">
+                                <h3 class="text-2xl font-bold mb-3">Transisi & Animasi</h3>
+                                <p class="text-gray-600 mb-4">Hidupkan antarmuka Anda dengan `transition` untuk perubahan properti yang mulus dan `@keyframes` untuk animasi yang lebih kompleks.</p>
+                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>.button {
+  transition: transform 0.3s ease-in-out;
+}
+.button:hover {
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.element {
+  animation: fadeIn 1s ease;
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="js-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showMainContent(); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Kurikulum
+                        </a>
+                        <div class="flex items-center gap-6 mb-12">
+                            <div class="w-20 h-20 bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center rounded-xl flex-shrink-0">
+                                <i data-feather="zap" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">JavaScript: Menghidupkan Web</h1>
+                                <p class="text-lg text-gray-600 mt-2">Kuasai logika, interaktivitas, manipulasi DOM, dan proses asinkron.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-8">
+                            <div class="glass-card p-8 rounded-xl">
+                                <h3 class="text-2xl font-bold mb-3">JavaScript Asinkron: `async/await`</h3>
+                                <p class="text-gray-600 mb-4">Gunakan sintaks `async/await` untuk menulis kode asinkron yang terlihat dan berperilaku seperti kode sinkron, membuatnya lebih mudah dibaca dan dikelola, terutama saat mengambil data dari API.</p>
+                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>async function fetchUserData() {
+  try {
+    const response = await fetch('https://api.github.com/users/google');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data.name); // Google
+  } catch (error) {
+    console.error('Gagal mengambil data:', error);
+  }
+}
+
+fetchUserData();</code></pre>
+                                </div>
+                            </div>
+                             <div class="glass-card p-8 rounded-xl">
+                                <h3 class="text-2xl font-bold mb-3">Metode Array Modern (ES6+)</h3>
+                                <p class="text-gray-600 mb-4">Metode fungsional seperti `.map()`, `.filter()`, dan `.reduce()` memungkinkan Anda memanipulasi data dalam array dengan cara yang deklaratif dan efisien.</p>
+                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>const users = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 30 },
+  { name: 'Charlie', age: 22 }
+];
+
+// Mendapatkan array nama pengguna
+const names = users.map(user => user.name); // ['Alice', 'Bob', 'Charlie']
+
+// Menyaring pengguna di atas usia 25
+const adults = users.filter(user => user.age > 25); // [{ name: 'Bob', age: 30 }]
+</code></pre>
+                                </div>
+                            </div>
+                             <div class="glass-card p-8 rounded-xl">
+                                <h3 class="text-2xl font-bold mb-3">ES6 Modules: `import` & `export`</h3>
+                                <p class="text-gray-600 mb-4">Organisir kode Anda ke dalam file-file terpisah (modul) dan bagikan fungsionalitas di antara mereka. Ini adalah dasar untuk aplikasi JavaScript skala besar.</p>
+                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>// file: utils.js
+export const PI = 3.14;
+export function sapa(nama) {
+  return `Halo, ${nama}`;
+}
+
+// file: main.js
+import { PI, sapa } from './utils.js';
+console.log(PI);
+console.log(sapa('Dunia'));
+</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="react-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showMainContent(); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Kurikulum
+                        </a>
+                        <div class="flex items-center gap-6 mb-12">
+                            <div class="w-20 h-20 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center rounded-xl flex-shrink-0">
+                                <i data-feather="box" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl md-text-5xl font-bold tracking-tighter text-gray-900">React: UI Modern</h1>
+                                <p class="text-lg text-gray-600 mt-2">Membangun UI modern dengan komponen, state, props, dan hooks.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-8">
+                             <div class="glass-card p-8 rounded-xl">
+                                <h3 class="text-2xl font-bold mb-3">Hooks: `useState` & `useEffect`</h3>
+                                <p class="text-gray-600 mb-4">`useState` untuk mengelola state lokal. `useEffect` untuk menangani efek samping seperti fetch data atau berlangganan event. Keduanya adalah fondasi dari komponen fungsional modern.</p>
+                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>import React, { useState, useEffect } from 'react';
+
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://api.example.com/users/${userId}`)
+      .then(res => res.json())
+      .then(data => setUser(data));
+  }, [userId]); // Jalankan lagi jika userId berubah
+
+  if (!user) return &lt;p&gt;Loading...&lt;/p&gt;;
+  return &lt;h1&gt;{user.name}&lt;/h1&gt;;
+}
+</code></pre>
+                                </div>
+                            </div>
+                            <div class="glass-card p-8 rounded-xl">
+                                <h3 class="text-2xl font-bold mb-3">Conditional Rendering</h3>
+                                <p class="text-gray-600 mb-4">Tampilkan UI yang berbeda berdasarkan kondisi tertentu (misalnya, status login pengguna) menggunakan operator ternary atau `&&`.</p>
+                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>function Greeting({ isLoggedIn }) {
+  return (
+    &lt;div&gt;
+      {isLoggedIn ? &lt;h1&gt;Selamat Datang!&lt;/h1&gt; : &lt;h1&gt;Silakan Login.&lt;/h1&gt;}
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+                                </div>
+                            </div>
+                             <div class="glass-card p-8 rounded-xl">
+                                <h3 class="text-2xl font-bold mb-3">Merender Daftar (Lists)</h3>
+                                <p class="text-gray-600 mb-4">Gunakan metode `.map()` untuk mengubah array data menjadi array elemen React. Jangan lupa untuk memberikan `key` unik untuk setiap item list.</p>
+                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>function ProductList({ products }) {
+  return (
+    &lt;ul&gt;
+      {products.map(product => (
+        &lt;li key={product.id}&gt;
+          {product.name} - ${product.price}
+        &lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}
+</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="python-page" class="tutorial-page hidden">
+                <section class="py-20 md:py-28">
+                    <div class="container mx-auto px-6 max-w-4xl">
+                        <a href="#" onclick="showMainContent(); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
+                            <i data-feather="arrow-left" class="w-4 h-4"></i>
+                            Kembali ke Kurikulum
+                        </a>
+                        <div class="flex items-center gap-6 mb-12">
+                            <div class="w-20 h-20 bg-green-500/10 border border-green-500/20 text-green-400 flex items-center justify-center rounded-xl flex-shrink-0">
+                                <i data-feather="terminal" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">Python: Bahasa Serbaguna</h1>
+                                <p class="text-lg text-gray-600 mt-2">Dari sintaks dasar, struktur data, OOP, hingga interaksi dengan file dan web.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-8">
+                             <div class="glass-card p-8 rounded-xl">
+                                <h3 class="text-2xl font-bold mb-3">List Comprehensions</h3>
+                                <p class="text-gray-600 mb-4">Cara yang elegan dan "Pythonic" untuk membuat list berdasarkan list yang sudah ada. Kode menjadi lebih singkat dan mudah dibaca.</p>
+                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code># Cara biasa
+kuadrat = []
+for i in range(10):
+  kuadrat.append(i * i)
+
+# Dengan List Comprehension
+kuadrat_elegan = [i * i for i in range(10)]
+
+print(kuadrat_elegan) # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+</code></pre>
+                                </div>
+                            </div>
+                             <div class="glass-card p-8 rounded-xl">
+                                <h3 class="text-2xl font-bold mb-3">Pemrograman Berorientasi Objek (OOP)</h3>
+                                <p class="text-gray-600 mb-4">Gunakan `class` untuk membuat cetak biru objek yang menggabungkan data (atribut) dan perilaku (metode). Ini adalah fondasi untuk membangun aplikasi yang kompleks dan terstruktur.</p>
+                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code>class Mobil:
+  def __init__(self, merek, warna):
+    self.merek = merek
+    self.warna = warna
+  
+  def info(self):
+    return f"Mobil {self.merek} berwarna {self.warna}"
+
+mobil_saya = Mobil("Tesla", "Putih")
+print(mobil_saya.info()) # Mobil Tesla berwarna Putih
+</code></pre>
+                                </div>
+                            </div>
+                            <div class="glass-card p-8 rounded-xl">
+                                <h3 class="text-2xl font-bold mb-3">Membaca & Menulis File</h3>
+                                <p class="text-gray-600 mb-4">Python memudahkan interaksi dengan file di sistem Anda. Gunakan blok `with open(...)` untuk memastikan file ditutup secara otomatis setelah selesai.</p>
+                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
+<pre><code># Menulis ke file
+with open("catatan.txt", "w") as file:
+  file.write("Halo, Dunia Python!")
+
+# Membaca dari file
+with open("catatan.txt", "r") as file:
+  konten = file.read()
+  print(konten) # Halo, Dunia Python!
+</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="border-t border-gray-200 mt-16">
+            <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+                <p>&copy; 2025 PanduanKoding. Semua Hak Cipta Dilindungi.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Feather Icons
+        feather.replace();
+
+        // Simple Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Optional: unobserve after revealing
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        revealElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Page/Section Toggling
+        const mainContent = document.querySelector('main');
+        const tutorialPagesContainer = document.getElementById('tutorial-pages');
+        const header = document.querySelector('header');
+        const footer = document.querySelector('footer');
+
+        function showTutorial(pageId) {
+            mainContent.style.display = 'none';
+            header.style.display = 'none';
+            footer.style.display = 'none';
+            
+            const allPages = tutorialPagesContainer.querySelectorAll('.tutorial-page');
+            allPages.forEach(p => p.classList.add('hidden'));
+
+            const selectedPage = document.getElementById(pageId);
+            if (selectedPage) {
+                selectedPage.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'auto' });
+                feather.replace(); // Re-render icons for new content
+            }
+        }
+
+        function showMainContent() {
+            mainContent.style.display = 'block';
+            header.style.display = 'block';
+            footer.style.display = 'block';
+            
+            const allPages = tutorialPagesContainer.querySelectorAll('.tutorial-page');
+            allPages.forEach(p => p.classList.add('hidden'));
+        }
+        
+        function showProjectLanding(projectName) {
+            mainContent.style.display = 'none';
+            header.style.display = 'none';
+            footer.style.display = 'none';
+            
+            const allPages = tutorialPagesContainer.querySelectorAll('.tutorial-page');
+            allPages.forEach(p => p.classList.add('hidden'));
+
+            const landingPageId = `${projectName}-landing-page`;
+            const selectedPage = document.getElementById(landingPageId);
+            if (selectedPage) {
+                selectedPage.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'auto' });
+                feather.replace(); // Re-render icons for new content
+            }
+        }
+
+        // Matrix Animation Script
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas to full screen
+        canvas.width = window.innerWidth;
+        canvas.height = document.querySelector('.spotlight-effect').offsetHeight;
+
+        // Karakter yang akan digunakan
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const alphabet = katakana + latin + nums;
+
+        const fontSize = 16;
+        const columns = Math.floor(canvas.width / fontSize);
+
+        // Array untuk melacak posisi y dari setiap kolom
+        const rainDrops = [];
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+
+        const draw = () => {
+            // Latar belakang semi-transparan untuk efek jejak
+            ctx.fillStyle = 'rgba(248, 249, 250, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#4F46E5'; // Warna teks (biru keunguan)
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+
+        setInterval(draw, 33);
+
+    </script>
+</body>
+</html>
