@@ -145,6 +145,39 @@
             height: 100%;
             opacity: 0.3; /* Opasitas ditingkatkan agar animasi matrix lebih terlihat */
         }
+        
+        /* Glitter effect for CTA section */
+        .glitter-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glitter-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 1%),
+                radial-gradient(circle at 60% 70%, rgba(255, 255, 255, 0.3) 0%, transparent 1%),
+                radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 1%),
+                radial-gradient(circle at 80% 40%, rgba(255, 255, 255, 0.3) 0%, transparent 1%),
+                radial-gradient(circle at 10% 80%, rgba(255, 255, 255, 0.3) 0%, transparent 1%);
+            background-size: 200% 200%;
+            animation: glitter 5s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes glitter {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 200%; }
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3), 0 0 30px rgba(255, 255, 255, 0.2);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -160,8 +193,6 @@
                 </a>
                 <div class="hidden md:flex items-center space-x-8 font-medium">
                     <a href="#pilih-proyek" class="text-gray-600 hover:text-black transition-colors duration-300">Proyek</a>
-                    <a href="#kurikulum" class="text-gray-600 hover:text-black transition-colors duration-300">Kurikulum</a>
-                    <a href="#" onclick="showTutorial('sejarah-page'); return false;" class="text-gray-600 hover:text-black transition-colors duration-300">Sejarah</a>
                     <a href="#fitur" class="text-gray-600 hover:text-black transition-colors duration-300">Fitur</a>
                     <a href="#ulasan" class="text-gray-600 hover:text-black transition-colors duration-300">Ulasan</a>
                 </div>
@@ -228,62 +259,6 @@
                             </div>
                             <h3 class="text-2xl font-bold mb-3 text-gray-900">Tic-Tac-Toe</h3>
                             <p class="text-gray-600">Bangun game klasik untuk dua pemain ini.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Curriculum Section -->
-            <section id="kurikulum" class="py-20 md:py-28">
-                <div class="container mx-auto px-6">
-                    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-                        <h2 class="text-3xl md:text-5xl font-bold tracking-tighter mb-4 text-gray-900">Kurikulum Terstruktur</h2>
-                        <p class="text-lg text-gray-600">
-                            Lima pilar utama pengembangan teknologi, dari fondasi web hingga backend dan data science.
-                        </p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-                        <!-- Card Template -->
-                        <div class="glass-card p-8 rounded-2xl flex flex-col items-start hover:-translate-y-2 transition-transform duration-300 reveal cursor-pointer" onclick="showTutorial('html-page')">
-                            <div class="w-16 h-16 bg-red-500/10 border border-red-500/20 text-red-500 flex items-center justify-center rounded-xl mb-6">
-                                <i data-feather="code" class="w-8 h-8"></i>
-                            </div>
-                            <span class="text-xs font-semibold bg-red-100 text-red-800 px-3 py-1 rounded-full mb-3">Pemula</span>
-                            <h3 class="text-2xl font-bold mb-3 text-gray-900">HTML</h3>
-                            <p class="text-gray-600 flex-grow">Pelajari kerangka dan struktur dasar setiap halaman web.</p>
-                        </div>
-                        <div class="glass-card p-8 rounded-2xl flex flex-col items-start hover:-translate-y-2 transition-transform duration-300 reveal cursor-pointer" style="transition-delay: 100ms;" onclick="showTutorial('css-page')">
-                            <div class="w-16 h-16 bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center rounded-xl mb-6">
-                                <i data-feather="pen-tool" class="w-8 h-8"></i>
-                            </div>
-                             <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-3 py-1 rounded-full mb-3">Pemula</span>
-                            <h3 class="text-2xl font-bold mb-3 text-gray-900">CSS</h3>
-                            <p class="text-gray-600 flex-grow">Hias dan desain website Anda menjadi karya seni visual yang menarik.</p>
-                        </div>
-                        <div class="glass-card p-8 rounded-2xl flex flex-col items-start hover:-translate-y-2 transition-transform duration-300 reveal cursor-pointer" style="transition-delay: 200ms;" onclick="showTutorial('js-page')">
-                            <div class="w-16 h-16 bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center rounded-xl mb-6">
-                                <i data-feather="zap" class="w-8 h-8"></i>
-                            </div>
-                            <span class="text-xs font-semibold bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full mb-3">Menengah</span>
-                            <h3 class="text-2xl font-bold mb-3 text-gray-900">JavaScript</h3>
-                            <p class="text-gray-600 flex-grow">Tambahkan interaktivitas dan logika untuk menghidupkan website Anda.</p>
-                        </div>
-                        <div class="glass-card p-8 rounded-2xl flex flex-col items-start hover:-translate-y-2 transition-transform duration-300 reveal cursor-pointer" style="transition-delay: 300ms;" onclick="showTutorial('react-page')">
-                            <div class="w-16 h-16 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center rounded-xl mb-6">
-                                <i data-feather="box" class="w-8 h-8"></i>
-                            </div>
-                            <span class="text-xs font-semibold bg-cyan-100 text-cyan-800 px-3 py-1 rounded-full mb-3">Lanjutan</span>
-                            <h3 class="text-2xl font-bold mb-3 text-gray-900">React</h3>
-                            <p class="text-gray-600 flex-grow">Bangun aplikasi web modern, cepat, dan berskala besar.</p>
-                        </div>
-                        <div class="glass-card p-8 rounded-2xl flex flex-col items-start hover:-translate-y-2 transition-transform duration-300 reveal cursor-pointer" style="transition-delay: 400ms;" onclick="showTutorial('python-page')">
-                            <div class="w-16 h-16 bg-green-500/10 border border-green-500/20 text-green-400 flex items-center justify-center rounded-xl mb-6">
-                                <i data-feather="terminal" class="w-8 h-8"></i>
-                            </div>
-                            <span class="text-xs font-semibold bg-green-100 text-green-800 px-3 py-1 rounded-full mb-3">Menengah</span>
-                            <h3 class="text-2xl font-bold mb-3 text-gray-900">Python</h3>
-                            <p class="text-gray-600 flex-grow">Kuasai bahasa serbaguna untuk backend, data science, dan automasi.</p>
                         </div>
                     </div>
                 </div>
@@ -418,8 +393,8 @@
             <!-- CTA Section -->
             <section class="py-20 md:py-28">
                 <div class="container mx-auto px-6">
-                    <div class="bg-gray-900 rounded-2xl p-8 md:p-16 text-center reveal btn-gradient-border">
-                         <h2 class="text-3xl md:text-5xl font-bold tracking-tighter mb-4 text-white">
+                    <div class="bg-gray-900 rounded-2xl p-8 md:p-16 text-center reveal glitter-effect">
+                         <h2 class="text-3xl md:text-5xl font-bold tracking-tighter mb-4 text-white glow-text">
                             Siap Memulai Karir <span class="gradient-text">Impianmu?</span>
                         </h2>
                         <p class="max-w-xl mx-auto text-lg text-gray-300 mb-8">
@@ -435,139 +410,6 @@
         
         <!-- Tutorial Pages Container -->
         <div id="tutorial-pages">
-            <!-- Sejarah Page -->
-            <div id="sejarah-page" class="tutorial-page hidden">
-                <section class="py-20 md:py-28">
-                    <div class="container mx-auto px-6 max-w-4xl">
-                        <a href="#" onclick="showMainContent(); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
-                            <i data-feather="arrow-left" class="w-4 h-4"></i>
-                            Kembali ke Beranda
-                        </a>
-                        <div class="text-center mb-16">
-                            <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 mb-4">Sejarah <span class="gradient-text">Pemrograman</span></h1>
-                            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Perjalanan panjang evolusi pemrograman komputer dari konsep awal hingga era modern.</p>
-                        </div>
-
-                        <div class="space-y-16">
-                            <!-- 19th Century Section -->
-                            <div class="glass-card p-8 rounded-2xl reveal">
-                                <h3 class="text-2xl font-bold mb-6 text-gray-900 flex items-center">
-                                    <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm mr-3">Abad ke-19</span>
-                                    Awal Konsep
-                                </h3>
-                                
-                                <div class="grid md:grid-cols-2 gap-8">
-                                    <div class="space-y-4">
-                                        <h4 class="text-xl font-semibold text-gray-800">Charles Babbage (1822 dan 1837)</h4>
-                                        <p class="text-gray-600">Menciptakan Mesin Hitung Diferensial (Difference Engine) dan kemudian Mesin Analitik (Analytical Engine). Mesin Analitik ini dianggap sebagai prototipe komputer modern pertama karena dirancang untuk diprogram menggunakan kartu berlubang.</p>
-                                    </div>
-                                    
-                                    <div class="space-y-4">
-                                        <h4 class="text-xl font-semibold text-gray-800">Ada Lovelace (sekitar 1843)</h4>
-                                        <p class="text-gray-600">Dianggap sebagai programer komputer pertama di dunia. Ia menulis algoritma yang dimaksudkan untuk diproses oleh Mesin Analitik Charles Babbage, yang pada saat itu belum selesai dibangun. Algoritma ini dirancang untuk menghitung urutan bilangan Bernoulli.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Early Computer Era Section -->
-                            <div class="glass-card p-8 rounded-2xl reveal">
-                                <h3 class="text-2xl font-bold mb-6 text-gray-900 flex items-center">
-                                    <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm mr-3">1940-1950an</span>
-                                    Era Awal Komputer
-                                </h3>
-                                
-                                <div class="space-y-6">
-                                    <div>
-                                        <h4 class="text-xl font-semibold text-gray-800 mb-3">Mesin Kode Awal</h4>
-                                        <p class="text-gray-600 mb-4">Komputer elektronik pertama, seperti ENIAC (1940-an), awalnya diprogram dengan mengatur ulang kabel fisik (wired control panel).</p>
-                                        
-                                        <div class="grid md:grid-cols-2 gap-6">
-                                            <div class="bg-gray-50 p-4 rounded-lg">
-                                                <h5 class="font-semibold text-gray-800 mb-2">Konrad Zuse (1942–1945)</h5>
-                                                <p class="text-gray-600">Menciptakan Plankalkül, yang dianggap sebagai bahasa pemrograman tingkat tinggi pertama, meskipun tidak diimplementasikan saat itu.</p>
-                                            </div>
-                                            
-                                            <div class="bg-gray-50 p-4 rounded-lg">
-                                                <h5 class="font-semibold text-gray-800 mb-2">John von Neumann</h5>
-                                                <p class="text-gray-600">Memperkenalkan konsep arsitektur komputer (arsitektur von Neumann) yang memungkinkan program disimpan di memori, memisahkan perangkat keras dan perangkat lunak.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div>
-                                        <h4 class="text-xl font-semibold text-gray-800 mb-3">Bahasa Tingkat Rendah</h4>
-                                        <div class="grid md:grid-cols-2 gap-6">
-                                            <div class="bg-gray-50 p-4 rounded-lg">
-                                                <h5 class="font-semibold text-gray-800 mb-2">Assembly Language (1949)</h5>
-                                                <p class="text-gray-600">Bahasa yang lebih sederhana daripada kode mesin (binary) yang menggunakan singkatan untuk instruksi.</p>
-                                            </div>
-                                            
-                                            <div class="bg-gray-50 p-4 rounded-lg">
-                                                <h5 class="font-semibold text-gray-800 mb-2">Short Code (1949)</h5>
-                                                <p class="text-gray-600">Salah satu bahasa tingkat tinggi pertama yang dikembangkan untuk komputer elektronik, meskipun harus diterjemahkan (diinterpretasi) setiap kali dijalankan.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div>
-                                        <h4 class="text-xl font-semibold text-gray-800 mb-3">Munculnya Compiler</h4>
-                                        <div class="bg-gray-50 p-4 rounded-lg">
-                                            <h5 class="font-semibold text-gray-800 mb-2">Grace Hopper (1951)</h5>
-                                            <p class="text-gray-600">Menciptakan compiler pertama (A-0 System), sebuah program yang menerjemahkan kode sumber (source code) menjadi kode mesin, mempercepat proses pemrograman.</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div>
-                                        <h4 class="text-xl font-semibold text-gray-800 mb-3">Bahasa Tingkat Tinggi Pertama yang Digunakan secara Luas</h4>
-                                        <div class="grid md:grid-cols-2 gap-6">
-                                            <div class="bg-gray-50 p-4 rounded-lg">
-                                                <h5 class="font-semibold text-gray-800 mb-2">Autocode (1952) oleh Alick Glennie</h5>
-                                                <p class="text-gray-600">Bahasa pemrograman terkompilasi pertama yang digunakan.</p>
-                                            </div>
-                                            
-                                            <div class="bg-gray-50 p-4 rounded-lg">
-                                                <h5 class="font-semibold text-gray-800 mb-2">FORTRAN (FORmula TRANslation) (1957)</h5>
-                                                <p class="text-gray-600">Oleh tim yang dipimpin John Backus di IBM: Dianggap sebagai bahasa pemrograman tingkat tinggi pertama yang berfungsi dan digunakan secara luas, khususnya untuk perhitungan ilmiah dan matematika.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Modern Development Section -->
-                            <div class="glass-card p-8 rounded-2xl reveal">
-                                <h3 class="text-2xl font-bold mb-6 text-gray-900 flex items-center">
-                                    <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm mr-3">1960-Sekarang</span>
-                                    Perkembangan Modern
-                                </h3>
-                                
-                                <div class="space-y-6">
-                                    <div>
-                                        <h4 class="text-xl font-semibold text-gray-800 mb-3">1960-an</h4>
-                                        <p class="text-gray-600">Lahir bahasa seperti ALGOL (1960), LISP (1958, masih digunakan), COBOL (1959), dan BASIC (1964).</p>
-                                    </div>
-                                    
-                                    <div>
-                                        <h4 class="text-xl font-semibold text-gray-800 mb-3">1970-an</h4>
-                                        <div class="grid md:grid-cols-2 gap-6">
-                                            <div class="bg-gray-50 p-4 rounded-lg">
-                                                <h5 class="font-semibold text-gray-800 mb-2">C Language (1972) oleh Dennis Ritchie</h5>
-                                                <p class="text-gray-600">Bahasa tingkat tinggi yang sangat berpengaruh, membentuk dasar bagi banyak bahasa modern lainnya.</p>
-                                            </div>
-                                            
-                                            <div class="bg-gray-50 p-4 rounded-lg">
-                                                <h5 class="font-semibold text-gray-800 mb-2">SQL (Structured Query Language) (1974)</h5>
-                                                <p class="text-gray-600">Bahasa standar untuk mengelola data dalam database relasional.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
             <!-- Project Landing Pages -->
             <div id="notepad-landing-page" class="tutorial-page hidden">
                 <section class="py-20 md:py-28">
@@ -596,6 +438,12 @@
                                 <h3 class="text-xl font-bold mb-2 text-yellow-400">3. JavaScript</h3>
                                 <p class="text-gray-600">Tambahkan logika untuk membuat, menyimpan, dan menghapus catatan.</p>
                             </div>
+                        </div>
+                        <div class="mt-8 text-center">
+                            <a href="https://youtu.be/3xFb7Ldaa4Q" target="_blank" class="inline-flex items-center gap-2 bg-red-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-105">
+                                <i data-feather="youtube" class="w-5 h-5"></i>
+                                Sumber YouTube
+                            </a>
                         </div>
                     </div>
                 </section>
@@ -629,6 +477,12 @@
                                 <p class="text-gray-600">Buat fungsi untuk menambah, mencentang, dan menghapus tugas.</p>
                             </div>
                         </div>
+                        <div class="mt-8 text-center">
+                            <a href="https://youtu.be/THEKW1gITJI" target="_blank" class="inline-flex items-center gap-2 bg-red-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-105">
+                                <i data-feather="youtube" class="w-5 h-5"></i>
+                                Sumber YouTube
+                            </a>
+                        </div>
                     </div>
                 </section>
             </div>
@@ -660,6 +514,12 @@
                                 <h3 class="text-xl font-bold mb-2 text-yellow-400">3. JavaScript</h3>
                                 <p class="text-gray-600">Tulis logika permainan: giliran, cek menang, dan reset game.</p>
                             </div>
+                        </div>
+                        <div class="mt-8 text-center">
+                            <a href="https://youtu.be/knkWr93kClY" target="_blank" class="inline-flex items-center gap-2 bg-red-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-105">
+                                <i data-feather="youtube" class="w-5 h-5"></i>
+                                Sumber YouTube
+                            </a>
                         </div>
                     </div>
                 </section>
@@ -944,136 +804,153 @@ textarea {
                         </div>
                         <div class="glass-card p-8 rounded-xl">
                             <h3 class="text-2xl font-bold mb-3">Kode Lengkap: script.js</h3>
-                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file bernama <code>script.js</code>. Kode ini mengatur semua interaksi pengguna, mulai dari menyimpan catatan hingga menampilkannya di layar.</p>
+                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file bernama <code>script.js</code>. Kode ini mengatur semua interaktivitas aplikasi.</p>
                             <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-<pre><code>// Tunggu hingga seluruh konten DOM dimuat
-document.addEventListener('DOMContentLoaded', () => {
-    // Ambil elemen-elemen yang dibutuhkan dari DOM
+<pre><code>// Tunggu hingga seluruh konten HTML dimuat
+document.addEventListener('DOMContentLoaded', function() {
+    // Mendapatkan elemen-elemen yang diperlukan dari DOM
     const noteForm = document.getElementById('note-form');
-    const noteTitleInput = document.getElementById('note-title');
-    const noteContentInput = document.getElementById('note-content');
+    const noteTitle = document.getElementById('note-title');
+    const noteContent = document.getElementById('note-content');
     const notesContainer = document.getElementById('notes-container');
-
-    // Muat catatan dari localStorage saat halaman dimuat
+    
+    // Mengambil catatan yang tersimpan di localStorage, atau buat array kosong jika tidak ada
     let notes = JSON.parse(localStorage.getItem('notes')) || [];
-    renderNotes();
-
-    // Tambahkan event listener untuk submit form
-    noteForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // Cegah form dari reload halaman
-
-        // Ambil nilai dari input
-        const title = noteTitleInput.value.trim();
-        const content = noteContentInput.value.trim();
-
-        // Validasi sederhana
-        if (title === '' || content === '') {
-            alert('Judul dan isi catatan tidak boleh kosong!');
-            return;
-        }
-
-        // Buat objek catatan baru
+    
+    // Menampilkan catatan yang ada saat halaman dimuat
+    displayNotes();
+    
+    // Event listener untuk saat formulir disubmit
+    noteForm.addEventListener('submit', function(e) {
+        // Mencegah perilaku default form (reload halaman)
+        e.preventDefault();
+        
+        // Membuat objek catatan baru
         const newNote = {
-            id: Date.now(), // Gunakan timestamp sebagai ID unik
-            title: title,
-            content: content,
-            createdAt: new Date().toISOString()
+            id: Date.now(), // ID unik menggunakan timestamp
+            title: noteTitle.value,
+            content: noteContent.value,
+            createdAt: new Date().toLocaleString()
         };
-
-        // Tambahkan catatan baru ke array
-        notes.unshift(newNote); // Gunakan unshift agar catatan baru muncul di atas
-
-        // Simpan array catatan ke localStorage
+        
+        // Menambahkan catatan baru ke array 'notes'
+        notes.push(newNote);
+        
+        // Menyimpan array 'notes' ke localStorage
         saveNotes();
-
-        // Kosongkan form
+        
+        // Menampilkan ulang daftar catatan
+        displayNotes();
+        
+        // Mengosongkan form
         noteForm.reset();
-
-        // Render ulang daftar catatan
-        renderNotes();
     });
-
-    // Fungsi untuk merender daftar catatan ke DOM
-    function renderNotes() {
-        // Kosongkan container terlebih dahulu
+    
+    // Fungsi untuk menyimpan catatan ke localStorage
+    function saveNotes() {
+        localStorage.setItem('notes', JSON.stringify(notes));
+    }
+    
+    // Fungsi untuk menampilkan semua catatan
+    function displayNotes() {
+        // Mengosongkan container
         notesContainer.innerHTML = '';
-
+        
+        // Jika tidak ada catatan, tampilkan pesan
         if (notes.length === 0) {
             notesContainer.innerHTML = '<p class="empty-state">Belum ada catatan. Buat catatan baru!</p>';
             return;
         }
-
-        // Loop melalui setiap catatan dan buat elemennya
+        
+        // Menampilkan setiap catatan
         notes.forEach(note => {
             const noteElement = createNoteElement(note);
             notesContainer.appendChild(noteElement);
         });
     }
-
-    // Fungsi untuk membuat elemen HTML untuk satu catatan
+    
+    // Fungsi untuk membuat elemen catatan
     function createNoteElement(note) {
+        // Membuat elemen div untuk catatan
         const noteDiv = document.createElement('div');
-        noteDiv.classList.add('note-item');
-        noteDiv.dataset.noteId = note.id; // Simpan ID di dataset untuk akses mudah
-
-        noteDiv.innerHTML = `
-            <h3 class="note-title">${escapeHtml(note.title)}</h3>
-            <p class="note-content">${escapeHtml(note.content)}</p>
-            <div class="note-actions">
-                <button onclick="deleteNote(${note.id})">Hapus</button>
-            </div>
-        `;
-
+        noteDiv.className = 'note-item';
+        noteDiv.dataset.id = note.id;
+        
+        // Membuat elemen untuk judul
+        const titleElement = document.createElement('h3');
+        titleElement.className = 'note-title';
+        titleElement.textContent = note.title;
+        
+        // Membuat elemen untuk konten
+        const contentElement = document.createElement('p');
+        contentElement.className = 'note-content';
+        contentElement.textContent = note.content;
+        
+        // Membuat elemen untuk tanggal
+        const dateElement = document.createElement('small');
+        dateElement.className = 'note-date';
+        dateElement.textContent = note.createdAt;
+        
+        // Membuat tombol hapus
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'delete-btn';
+        deleteButton.textContent = 'Hapus';
+        deleteButton.addEventListener('click', function() {
+            deleteNote(note.id);
+        });
+        
+        // Membuat container untuk tombol
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'note-actions';
+        actionsDiv.appendChild(deleteButton);
+        
+        // Menambahkan semua elemen ke div catatan
+        noteDiv.appendChild(titleElement);
+        noteDiv.appendChild(contentElement);
+        noteDiv.appendChild(dateElement);
+        noteDiv.appendChild(actionsDiv);
+        
         return noteDiv;
     }
-
+    
     // Fungsi untuk menghapus catatan
-    window.deleteNote = (id) => {
-        if (confirm('Apakah Anda yakin ingin menghapus catatan ini?')) {
-            // Filter array untuk menghapus catatan dengan ID yang cocok
-            notes = notes.filter(note => note.id !== id);
-            
-            // Simpan perubahan dan render ulang
-            saveNotes();
-            renderNotes();
-        }
-    };
-
-    // Fungsi untuk menyimpan catatan ke localStorage
-    function saveNotes() {
-        localStorage.setItem('notes', JSON.stringify(notes));
-    }
-
-    // Fungsi untuk mencegah serangan XSS (sederhana)
-    function escapeHtml(text) {
-        const map = {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#039;'
-        };
-        return text.replace(/[&<>"']/g, m => map[m]);
+    function deleteNote(id) {
+        // Filter array untuk menghapus catatan dengan ID yang sesuai
+        notes = notes.filter(note => note.id !== id);
+        
+        // Menyimpan perubahan ke localStorage
+        saveNotes();
+        
+        // Menampilkan ulang daftar catatan
+        displayNotes();
     }
 });</code></pre>
                             </div>
                             <div class="mt-6">
-                                <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Logika Penting:</h4>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Kode Penting:</h4>
                                 <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                    <li><code>localStorage</code>: Fitur browser yang memungkinkan kita menyimpan data secara lokal (di komputer pengguna) bahkan setelah browser ditutup. Data ini akan bertahan.</li>
-                                    <li><code>JSON.parse() & JSON.stringify()</code>: Karena <code>localStorage</code> hanya bisa menyimpan string, kita gunakan JSON untuk mengubah array objek catatan menjadi string (saat menyimpan) dan sebaliknya (saat mengambil).</li>
-                                    <li><code>DOMContentLoaded</code>: Event ini memastikan bahwa kode JavaScript kita hanya berjalan setelah seluruh struktur HTML halaman telah dimuat dan siap dimanipulasi.</li>
-                                    <li><code>e.preventDefault()</code>: Mencegah perilaku default dari form submit, yaitu me-reload halaman.</li>
-                                    <li><code>Date.now()</code>: Digunakan untuk membuat ID unik untuk setiap catatan baru.</li>
-                                    <li><code>escapeHtml()</code>: Fungsi keamanan penting untuk mencegah serangan Cross-Site Scripting (XSS) dengan mengubah karakter khusus HTML menjadi entitas HTML.</li>
+                                    <li><code>localStorage</code>: API browser untuk menyimpan data secara lokal di perangkat pengguna.</li>
+                                    <li><code>JSON.parse() dan JSON.stringify()</code>: Mengkonversi array objek ke string dan sebaliknya untuk penyimpanan di localStorage.</li>
+                                    <li><code>addEventListener('submit', ...)</code>: Menangani pengiriman form tanpa reload halaman.</li>
+                                    <li><code>createElement()</code>: Membuat elemen HTML secara dinamis dengan JavaScript.</li>
+                                    <li><code>dataset.id</code>: Menyimpan ID catatan di atribut data untuk akses mudah.</li>
                                 </ul>
+                            </div>
+                            <div class="mt-6 pt-6 border-t border-gray-200">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900 flex items-center gap-2">
+                                    <i data-feather="star" class="w-5 h-5 text-yellow-500"></i>
+                                    Pro Tip
+                                </h4>
+                                <p class="text-gray-700">
+                                    Untuk membuat aplikasi lebih canggih, Anda bisa menambahkan fitur "Edit". Saat tombol "Edit" diklik, Anda bisa mengubah elemen catatan menjadi <code>&lt;input&gt;</code> dan <code>&lt;textarea&gt;</code> lagi, lalu menyimpan perubahannya. Ini akan melatih Anda lebih dalam tentang manipulasi DOM dan state management.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </section>
             </div>
-            
-            <!-- TODO TUTORIALS -->
+
+            <!-- TODO LIST TUTORIALS -->
             <div id="todo-html-page" class="tutorial-page hidden">
                 <section class="py-20 md:py-28">
                     <div class="container mx-auto px-6 max-w-4xl">
@@ -1087,12 +964,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                             <div>
                                 <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">To-Do List: Struktur HTML</h1>
-                                <p class="text-lg text-gray-600 mt-2">Membangun kerangka aplikasi to-do list dengan form input dan daftar tugas.</p>
+                                <p class="text-lg text-gray-600 mt-2">Membangun kerangka dasar aplikasi dengan form input dan daftar untuk menampilkan tugas.</p>
                             </div>
                         </div>
                         <div class="glass-card p-8 rounded-xl">
                             <h3 class="text-2xl font-bold mb-3">Kode Lengkap: index.html</h3>
-                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file bernama <code>index.html</code>. Struktur ini mencakup header, formulir untuk menambah tugas baru, dan area untuk menampilkan daftar tugas.</p>
+                            <p class="text-gray-600 mb-4">Salin kode ini ke file <code>index.html</code> Anda. Struktur ini mencakup judul, form untuk menambah tugas, dan sebuah list kosong yang akan kita isi dengan JavaScript.</p>
                             <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="id"&gt;
@@ -1104,32 +981,13 @@ document.addEventListener('DOMContentLoaded', () => {
 &lt;/head&gt;
 &lt;body&gt;
     &lt;div class="container"&gt;
-        &lt;header&gt;
-            &lt;h1&gt;Daftar Tugas Saya&lt;/h1&gt;
-        &lt;/header&gt;
-        
-        &lt;main&gt;
-            &lt;section class="task-form"&gt;
-                &lt;h2&gt;Tambah Tugas Baru&lt;/h2&gt;
-                &lt;!-- Form untuk input tugas baru --&gt;
-                &lt;form id="task-form"&gt;
-                    &lt;div class="form-group"&gt;
-                        &lt;input type="text" id="task-input" placeholder="Apa yang ingin kamu kerjakan?" required&gt;
-                    &lt;/div&gt;
-                    &lt;button type="submit" class="btn"&gt;Tambah Tugas&lt;/button&gt;
-                &lt;/form&gt;
-            &lt;/section&gt;
-            
-            &lt;section class="tasks-list"&gt;
-                &lt;h2&gt;Daftar Tugas&lt;/h2&gt;
-                &lt;!-- Wadah untuk menampilkan tugas --&gt;
-                &lt;ul id="tasks-container"&gt;
-                    &lt;!-- Tugas akan ditambahkan di sini oleh JavaScript --&gt;
-                &lt;/ul&gt;
-            &lt;/section&gt;
-        &lt;/main&gt;
+        &lt;h1&gt;To-Do List&lt;/h1&gt;
+        &lt;form id="todo-form"&gt;
+            &lt;input type="text" id="todo-input" placeholder="Tambahkan tugas baru..." autocomplete="off"&gt;
+            &lt;button type="submit"&gt;Tambah&lt;/button&gt;
+        &lt;/form&gt;
+        &lt;ul id="todo-list"&gt;&lt;/ul&gt;
     &lt;/div&gt;
-    
     &lt;script src="script.js"&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
@@ -1137,10 +995,19 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="mt-6">
                                 <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Elemen Penting:</h4>
                                 <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                    <li><code>&lt;form id="task-form"&gt;</code>: Formulir untuk menangani input tugas baru dari pengguna.</li>
-                                    <li><code>&lt;input type="text" id="task-input"&gt;</code>: Field input teks untuk memasukkan deskripsi tugas.</li>
-                                    <li><code>&lt;ul id="tasks-container"&gt;</code>: List unordered yang akan diisi dengan item-item tugas (elemen <code>&lt;li&gt;</code>) secara dinamis oleh JavaScript.</li>
+                                    <li><code>&lt;form id="todo-form"&gt;</code>: Formulir untuk memasukkan tugas baru.</li>
+                                    <li><code>&lt;input id="todo-input"&gt;</code>: Tempat pengguna mengetik tugas baru.</li>
+                                    <li><code>&lt;ul id="todo-list"&gt;</code>: Wadah (unordered list) yang awalnya kosong, tempat daftar tugas akan ditampilkan secara dinamis oleh JavaScript.</li>
                                 </ul>
+                            </div>
+                            <div class="mt-6 pt-6 border-t border-gray-200">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900 flex items-center gap-2">
+                                    <i data-feather="star" class="w-5 h-5 text-yellow-500"></i>
+                                    Pro Tip
+                                </h4>
+                                <p class="text-gray-700">
+                                    Gunakan atribut <code>autocomplete="off"</code> pada input untuk mencegah browser menampilkan saran dari input sebelumnya. Ini memberikan pengalaman pengguna yang lebih bersih untuk aplikasi seperti to-do list.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -1160,154 +1027,116 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                             <div>
                                 <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">To-Do List: Styling CSS</h1>
-                                <p class="text-lg text-gray-600 mt-2">Memberikan tampilan yang bersih dan fungsional pada aplikasi to-do list.</p>
+                                <p class="text-lg text-gray-600 mt-2">Membuat tampilan aplikasi menjadi bersih, modern, dan interaktif.</p>
                             </div>
                         </div>
                         <div class="glass-card p-8 rounded-xl">
                             <h3 class="text-2xl font-bold mb-3">Kode Lengkap: style.css</h3>
-                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file bernama <code>style.css</code>. Kode ini akan mengatur tata letak, warna, dan gaya untuk form dan daftar tugas.</p>
+                            <p class="text-gray-600 mb-4">Buat file <code>style.css</code> dan salin kode ini. Kode ini akan mengatur layout, warna, dan memberikan efek visual saat tugas selesai atau dihapus.</p>
                             <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-<pre><code>/* Reset dan Gaya Umum */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
+<pre><code>body {
     font-family: 'Inter', sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
-    line-height: 1.6;
+    background-color: #e9ecef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
 .container {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
-}
-
-/* Header */
-header {
-    text-align: center;
-    margin-bottom: 30px;
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    color: #1a2b4d;
-    font-size: 2.5rem;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
 }
 
-h2 {
-    color: #4a5568;
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-}
-
-/* Form Tugas */
-.task-form {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    margin-bottom: 30px;
-}
-
-.form-group {
+#todo-form {
     display: flex;
     gap: 10px;
+    margin-bottom: 20px;
 }
 
-#task-input {
+#todo-input {
     flex-grow: 1;
     padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
     font-size: 1rem;
 }
 
-.btn {
-    background-color: #48bb78;
+#todo-form button {
+    background-color: #4F46E5;
     color: white;
     border: none;
-    padding: 12px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: background-color 0.2s;
-}
-
-.btn:hover {
-    background-color: #38a169;
-}
-
-/* Daftar Tugas */
-.tasks-list {
-    background-color: white;
-    padding: 20px;
+    padding: 0 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    font-weight: 600;
 }
 
-#tasks-container {
-    list-style-type: none;
+#todo-list {
+    list-style: none;
+    padding: 0;
 }
 
-.task-item {
+.todo-item {
     display: flex;
     align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #e2e8f0;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
 }
 
-.task-item:last-child {
-    border-bottom: none;
-}
-
-.task-item input[type="checkbox"] {
-    margin-right: 15px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-}
-
-.task-item label {
+.todo-item span {
     flex-grow: 1;
     cursor: pointer;
-    font-size: 1rem;
-    transition: color 0.2s;
 }
 
-.task-item.completed label {
+.todo-item.completed span {
     text-decoration: line-through;
-    color: #a0aec0;
+    color: #888;
 }
 
-.task-item .delete-btn {
-    background: none;
+.delete-btn {
+    background: #e74c3c;
+    color: white;
     border: none;
-    color: #e53e3e;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
     cursor: pointer;
-    font-size: 1.2rem;
-    padding: 5px;
-    opacity: 0;
-    transition: opacity 0.2s;
-}
-
-.task-item:hover .delete-btn {
-    opacity: 1;
+    font-weight: bold;
+    margin-left: 10px;
 }</code></pre>
                             </div>
                             <div class="mt-6">
                                 <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Gaya Penting:</h4>
                                 <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                    <li><code>display: flex;</code> pada <code>.form-group</code>: Menyusun input dan tombol secara berdampingan.</li>
-                                    <li><code>flex-grow: 1;</code> pada <code>#task-input</code>: Membuat input field memenuhi sisa ruang yang tersedia.</li>
-                                    <li><code>display: flex;</code> pada <code>.task-item</code>: Menyusun checkbox, label teks, dan tombol hapus dalam satu baris.</li>
-                                    <li><code>.task-item.completed label</code>: Gaya khusus untuk tugas yang telah ditandai selesai (dicoret dan berwarna abu-abu).</li>
-                                    <li><code>opacity: 0;</code> dan <code>:hover .delete-btn</code>: Tombol hapus disembunyikan secara default dan hanya muncul saat pengguna mengarahkan kursor ke item tugas, untuk tampilan yang lebih bersih.</li>
+                                    <li><code>display: flex;</code> pada form dan item tugas digunakan untuk menyusun elemen secara horizontal dengan mudah.</li>
+                                    <li><code>flex-grow: 1;</code> pada input dan teks tugas membuatnya mengisi sisa ruang yang tersedia.</li>
+                                    <li><code>.todo-item.completed span</code>: Selector ini menargetkan teks tugas (span) yang berada di dalam item yang memiliki kelas "completed", lalu memberinya gaya coretan.</li>
+                                    <li><code>cursor: pointer;</code> pada teks tugas memberikan isyarat visual bahwa elemen tersebut dapat diklik.</li>
                                 </ul>
+                            </div>
+                            <div class="mt-6 pt-6 border-t border-gray-200">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900 flex items-center gap-2">
+                                    <i data-feather="star" class="w-5 h-5 text-yellow-500"></i>
+                                    Pro Tip
+                                </h4>
+                                <p class="text-gray-700">
+                                    Gunakan pseudo-element seperti <code>::before</code> dan <code>::after</code> untuk membuat checkbox kustom yang lebih menarik daripada checkbox default browser. Ini memberikan kontrol penuh atas tampilan dan nuansa aplikasi Anda.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -1327,104 +1156,90 @@ h2 {
                             </div>
                             <div>
                                 <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">To-Do List: Logika JavaScript</h1>
-                                <p class="text-lg text-gray-600 mt-2">Mengimplementasikan fungsi untuk menambah, menyelesaikan, menghapus tugas, dan menyimpannya di localStorage.</p>
+                                <p class="text-lg text-gray-600 mt-2">Menghidupkan aplikasi dengan fungsi untuk menambah, menyelesaikan, menghapus, dan menyimpan tugas.</p>
                             </div>
                         </div>
                         <div class="glass-card p-8 rounded-xl">
                             <h3 class="text-2xl font-bold mb-3">Kode Lengkap: script.js</h3>
-                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file bernama <code>script.js</code>. Kode ini akan mengelola semua logika aplikasi to-do list.</p>
+                            <p class="text-gray-600 mb-4">Buat file <code>script.js</code> dan salin kode ini. Kode ini akan menangani semua interaksi pengguna dan manajemen data tugas.</p>
                             <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
 <pre><code>document.addEventListener('DOMContentLoaded', () => {
-    const taskForm = document.getElementById('task-form');
-    const taskInput = document.getElementById('task-input');
-    const tasksContainer = document.getElementById('tasks-container');
+    const form = document.getElementById('todo-form');
+    const input = document.getElementById('todo-input');
+    const list = document.getElementById('todo-list');
 
-    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    renderTasks();
+    // Muat tugas dari localStorage saat halaman dibuka
+    const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+    savedTodos.forEach(todo => addTodoItem(todo.text, todo.completed));
 
-    taskForm.addEventListener('submit', (e) => {
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const taskText = taskInput.value.trim();
-
-        if (taskText === '') {
-            alert('Tugas tidak boleh kosong!');
-            return;
+        const text = input.value.trim();
+        if (text !== '') {
+            addTodoItem(text, false);
+            saveTodos();
+            input.value = '';
         }
-
-        const newTask = {
-            id: Date.now(),
-            text: taskText,
-            completed: false
-        };
-
-        tasks.push(newTask);
-        saveTasks();
-        renderTasks();
-        taskInput.value = '';
     });
 
-    function renderTasks() {
-        tasksContainer.innerHTML = '';
-        tasks.forEach(task => {
-            const taskElement = createTaskElement(task);
-            tasksContainer.appendChild(taskElement);
-        });
-    }
-
-    function createTaskElement(task) {
+    function addTodoItem(text, completed) {
         const li = document.createElement('li');
-        li.classList.add('task-item');
-        if (task.completed) {
+        li.className = 'todo-item';
+        if (completed) {
             li.classList.add('completed');
         }
 
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.checked = task.completed;
-        checkbox.addEventListener('change', () => toggleTask(task.id));
-
-        const label = document.createElement('label');
-        label.textContent = task.text;
+        const span = document.createElement('span');
+        span.textContent = text;
+        span.addEventListener('click', () => {
+            li.classList.toggle('completed');
+            saveTodos();
+        });
 
         const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('delete-btn');
-        deleteBtn.innerHTML = '&times;';
-        deleteBtn.addEventListener('click', () => deleteTask(task.id));
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.textContent = 'X';
+        deleteBtn.addEventListener('click', () => {
+            li.remove();
+            saveTodos();
+        });
 
-        li.appendChild(checkbox);
-        li.appendChild(label);
+        li.appendChild(span);
         li.appendChild(deleteBtn);
-
-        return li;
+        list.appendChild(li);
     }
 
-    function toggleTask(id) {
-        tasks = tasks.map(task =>
-            task.id === id ? { ...task, completed: !task.completed } : task
-        );
-        saveTasks();
-        renderTasks();
-    }
-
-    function deleteTask(id) {
-        tasks = tasks.filter(task => task.id !== id);
-        saveTasks();
-        renderTasks();
-    }
-
-    function saveTasks() {
-        localStorage.setItem('tasks', JSON.stringify(tasks));
+    function saveTodos() {
+        const todos = [];
+        document.querySelectorAll('.todo-item').forEach(item => {
+            todos.push({
+                text: item.querySelector('span').textContent,
+                completed: item.classList.contains('completed')
+            });
+        });
+        localStorage.setItem('todos', JSON.stringify(todos));
     }
 });</code></pre>
                             </div>
                             <div class="mt-6">
-                                <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Logika Penting:</h4>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Kode Penting:</h4>
                                 <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                    <li><code>createTaskElement</code>: Fungsi ini membangun elemen <code>&lt;li&gt;</code> beserta isinya (checkbox, label, tombol hapus) untuk setiap tugas. Ini membuat kode lebih terorganisir.</li>
-                                    <li><code>toggleTask</code>: Fungsi ini menggunakan <code>.map()</code> untuk membuat salinan array <code>tasks</code>, lalu mengubah properti <code>completed</code> pada tugas yang sesuai dengan ID. Ini adalah pendekatan yang aman (immutable) untuk memperbarui state.</li>
-                                    <li><code>deleteTask</code>: Fungsi ini menggunakan <code>.filter()</code> untuk membuat array baru yang tidak menyertakan tugas dengan ID yang dihapus.</li>
-                                    <li><code>addEventListener</code> pada elemen dinamis: Perhatikan bagaimana event listener untuk checkbox dan tombol hapus ditambahkan langsung saat elemen dibuat di dalam <code>createTaskElement</code>. Ini memastikan setiap elemen memiliki fungsionalitasnya masing-masing.</li>
+                                    <li><code>addEventListener('DOMContentLoaded', ...)</code>: Memastikan kode JavaScript berjalan setelah seluruh halaman HTML dimuat.</li>
+                                    <li><code>e.preventDefault()</code>: Mencegah form mengirim data dan me-reload halaman.</li>
+                                    <li><code>addTodoItem()</code>: Fungsi utama yang membuat elemen-elemen HTML (<code>li</code>, <code>span</code>, <code>button</code>) untuk setiap tugas baru.</li>
+                                    <li><code>classList.toggle('completed')</code>: Cara mudah untuk menambah/menghapus kelas CSS untuk menandai tugas selesai.</li>
+                                    <li><code>localStorage.setItem()</code> dan <code>localStorage.getItem()</code>: Digunakan untuk menyimpan dan mengambil data tugas sehingga tidak hilang saat halaman ditutup.</li>
+                                    <li><code>JSON.stringify()</code> dan <code>JSON.parse()</code>: Mengubah data objek/array menjadi string untuk disimpan di localStorage, dan sebaliknya.</li>
                                 </ul>
+                            </div>
+                            <div class="mt-6 pt-6 border-t border-gray-200">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900 flex items-center gap-2">
+                                    <i data-feather="star" class="w-5 h-5 text-yellow-500"></i>
+                                    Pro Tip
+                                </h4>
+                                <p class="text-gray-700">
+                                    Daripada menyimpan seluruh elemen HTML di localStorage, lebih efisien menyimpan datanya saja (teks dan status selesai) sebagai array of objects. Ini membuat data lebih bersih, mudah dikelola, dan lebih cepat saat disimpan atau dimuat.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -1445,12 +1260,12 @@ h2 {
                             </div>
                             <div>
                                 <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">Tic-Tac-Toe: Struktur HTML</h1>
-                                <p class="text-lg text-gray-600 mt-2">Membangun papan permainan 3x3 dan elemen status untuk game Tic-Tac-Toe.</p>
+                                <p class="text-lg text-gray-600 mt-2">Membangun papan permainan, area status, dan tombol untuk memulai ulang permainan.</p>
                             </div>
                         </div>
                         <div class="glass-card p-8 rounded-xl">
                             <h3 class="text-2xl font-bold mb-3">Kode Lengkap: index.html</h3>
-                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file bernama <code>index.html</code>. Struktur ini mencakup header, papan permainan, dan area untuk menampilkan status game.</p>
+                            <p class="text-gray-600 mb-4">Gunakan kode ini untuk file <code>index.html</code> Anda. Ini adalah fondasi visual dari permainan kita.</p>
                             <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="id"&gt;
@@ -1461,34 +1276,22 @@ h2 {
     &lt;link rel="stylesheet" href="style.css"&gt;
 &lt;/head&gt;
 &lt;body&gt;
-    &lt;div class="game-container"&gt;
-        &lt;header&gt;
-            &lt;h1&gt;Tic-Tac-Toe&lt;/h1&gt;
-        &lt;/header&gt;
-        
-        &lt;main&gt;
-            &lt;!-- Menampilkan status giliran atau pemenang --&gt;
-            &lt;div class="status"&gt;Giliran: &lt;span id="status-player"&gt;X&lt;/span&gt;&lt;/div&gt;
-            
-            &lt;!-- Papan permainan 3x3 --&gt;
-            &lt;section class="board" id="board"&gt;
-                &lt;!-- 9 sel untuk permainan --&gt;
-                &lt;div class="cell" data-cell-index="0"&gt;&lt;/div&gt;
-                &lt;div class="cell" data-cell-index="1"&gt;&lt;/div&gt;
-                &lt;div class="cell" data-cell-index="2"&gt;&lt;/div&gt;
-                &lt;div class="cell" data-cell-index="3"&gt;&lt;/div&gt;
-                &lt;div class="cell" data-cell-index="4"&gt;&lt;/div&gt;
-                &lt;div class="cell" data-cell-index="5"&gt;&lt;/div&gt;
-                &lt;div class="cell" data-cell-index="6"&gt;&lt;/div&gt;
-                &lt;div class="cell" data-cell-index="7"&gt;&lt;/div&gt;
-                &lt;div class="cell" data-cell-index="8"&gt;&lt;/div&gt;
-            &lt;/section&gt;
-            
-            &lt;!-- Tombol untuk memulai ulang permainan --&gt;
-            &lt;button id="restart-button" class="btn-restart"&gt;Main Lagi&lt;/button&gt;
-        &lt;/main&gt;
+    &lt;div class="container"&gt;
+        &lt;h1&gt;Tic-Tac-Toe&lt;/h1&gt;
+        &lt;div id="status" class="status"&gt;Giliran X&lt;/div&gt;
+        &lt;div id="board" class="board"&gt;
+            &lt;div class="cell" data-index="0"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-index="1"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-index="2"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-index="3"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-index="4"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-index="5"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-index="6"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-index="7"&gt;&lt;/div&gt;
+            &lt;div class="cell" data-index="8"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;button id="restart-button" class="restart-btn"&gt;Mulai Ulang&lt;/button&gt;
     &lt;/div&gt;
-    
     &lt;script src="script.js"&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
@@ -1496,11 +1299,21 @@ h2 {
                             <div class="mt-6">
                                 <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Elemen Penting:</h4>
                                 <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                    <li><code>&lt;div class="status"&gt;</code>: Elemen untuk menampilkan informasi kepada pemain, seperti siapa giliran atau siapa yang menang.</li>
-                                    <li><code>&lt;section class="board" id="board"&gt;</code>: Kontainer untuk papan permainan. Ini akan menjadi target utama manipulasi JavaScript.</li>
-                                    <li><code>&lt;div class="cell" data-cell-index="..."&gt;</code>: Setiap sel pada papan. Atribut <code>data-cell-index</code> sangat penting untuk memberikan identitas unik (indeks 0-8) pada setiap sel, sehingga JavaScript tahu sel mana yang diklik.</li>
-                                    <li><code>&lt;button id="restart-button"&gt;</code>: Tombol untuk mengatur ulang state permainan ke kondisi awal.</li>
+                                    <li><code>&lt;div id="status"&gt;</code>: Akan menampilkan informasi penting seperti giliran siapa atau siapa pemenangnya.</li>
+                                    <li><code>&lt;div id="board"&gt;</code>: Kontainer utama untuk papan permainan.</li>
+                                    <li><code>&lt;div class="cell"&gt;</code>: Sembilan kotak yang akan menjadi area klik pemain.</li>
+                                    <li><code>data-index="..."</code>: Atribut data kustom untuk menyimpan nomor indeks setiap sel (0-8). Ini sangat penting untuk logika JavaScript.</li>
+                                    <li><code>&lt;button id="restart-button"&gt;</code>: Tombol untuk mereset permainan.</li>
                                 </ul>
+                            </div>
+                            <div class="mt-6 pt-6 border-t border-gray-200">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900 flex items-center gap-2">
+                                    <i data-feather="star" class="w-5 h-5 text-yellow-500"></i>
+                                    Pro Tip
+                                </h4>
+                                <p class="text-gray-700">
+                                    Menggunakan atribut <code>data-*</code> seperti <code>data-index</code> adalah praktik terbaik untuk menyimpan data atau metadata yang relevan dengan elemen, langsung di HTML. Ini membuat kode JavaScript lebih bersih karena tidak perlu mengandalkan urutan elemen atau kelas yang rumit untuk mengidentifikasi sel.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -1520,112 +1333,94 @@ h2 {
                             </div>
                             <div>
                                 <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">Tic-Tac-Toe: Styling CSS</h1>
-                                <p class="text-lg text-gray-600 mt-2">Mendesain papan permainan dan sel-selnya agar terlihat menarik dan interaktif.</p>
+                                <p class="text-lg text-gray-600 mt-2">Mendesain papan permainan 3x3 yang responsif dan jelas.</p>
                             </div>
                         </div>
                         <div class="glass-card p-8 rounded-xl">
                             <h3 class="text-2xl font-bold mb-3">Kode Lengkap: style.css</h3>
-                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file bernama <code>style.css</code>. Kode ini menggunakan CSS Grid untuk membuat papan permainan dan menambahkan efek hover.</p>
+                            <p class="text-gray-600 mb-4">Buat file <code>style.css</code> dan salin kode ini. Kita akan menggunakan CSS Grid untuk membuat papan permainan dengan mudah.</p>
                             <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-<pre><code>/* Gaya Umum */
-body {
+<pre><code>body {
     font-family: 'Inter', sans-serif;
+    background-color: #2c3e50;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #2c3e50;
-    color: #ecf0f1;
-}
-
-.game-container {
     text-align: center;
 }
 
-h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    color: #f39c12;
+.container {
+    padding: 20px;
 }
 
 .status {
     font-size: 1.5rem;
     margin-bottom: 20px;
-    height: 40px;
 }
 
-#status-player {
-    font-weight: bold;
-    color: #3498db;
-}
-
-/* Papan Permainan */
 .board {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
-    gap: 10px;
-    margin: 0 auto 20px auto;
-    background-color: #34495e;
-    padding: 10px;
-    border-radius: 10px;
+    gap: 5px;
+    margin-bottom: 20px;
 }
 
 .cell {
-    background-color: #7f8c8d;
-    border: none;
-    border-radius: 5px;
-    font-size: 3rem;
-    font-weight: bold;
-    color: #ecf0f1;
-    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    background-color: #34495e;
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.2s, transform 0.1s;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .cell:hover {
-    background-color: #95a5a6;
-    transform: scale(1.05);
+    background-color: #4a627a;
 }
 
-/* Gaya untuk simbol X dan O */
 .cell.x {
-    color: #e74c3c;
+    color: #3498db; /* Biru */
 }
 
 .cell.o {
-    color: #3498db;
+    color: #e74c3c; /* Merah */
 }
 
-/* Tombol Restart */
-.btn-restart {
+.restart-btn {
     background-color: #f39c12;
-    color: #2c3e50;
+    color: white;
     border: none;
-    padding: 12px 24px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
-}
-
-.btn-restart:hover {
-    background-color: #e67e22;
-    transform: scale(1.05);
 }</code></pre>
                             </div>
                             <div class="mt-6">
                                 <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Gaya Penting:</h4>
                                 <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                    <li><code>display: flex;</code> pada <code>body</code>: Ini adalah trik sederhana untuk memusatkan seluruh kontainer game secara vertikal dan horizontal di halaman.</li>
-                                    <li><code>display: grid;</code> pada <code>.board</code>: Ini adalah cara modern dan paling efisien untuk membuat layout papan 3x3. <code>grid-template-columns</code> dan <code>grid-template-rows</code> mendefinisikan ukuran setiap kolom dan baris.</li>
-                                    <li><code>gap: 10px;</code>: Menambahkan jarak antar sel, sehingga tidak saling menempel.</li>
-                                    <li><code>.cell.x</code> dan <code>.cell.o</code>: Kelas ini akan ditambahkan oleh JavaScript ke sel yang sudah diklik untuk memberikan warna berbeda pada simbol X dan O.</li>
-                                    <li><code>transform: scale(1.05);</code>: Memberikan efek zoom-in halus saat kursor diarahkan ke sel atau tombol, meningkatkan interaktivitas.</li>
+                                    <li><code>display: grid;</code>: Properti CSS modern yang sangat kuat untuk membuat layout berbasis baris dan kolom.</li>
+                                    <li><code>grid-template-columns: repeat(3, 100px);</code>: Membuat 3 kolom, masing-masing dengan lebar 100px.</li>
+                                    <li><code>gap: 5px;</code>: Memberi jarak 5px antar sel di dalam grid.</li>
+                                    <li><code>.cell.x</code> dan <code>.cell.o</code>: Selector ini menargetkan sel yang memiliki kelas "cell" DAN kelas "x" (atau "o"), memungkinkan kita memberi warna berbeda untuk setiap pemain.</li>
                                 </ul>
+                            </div>
+                            <div class="mt-6 pt-6 border-t border-gray-200">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900 flex items-center gap-2">
+                                    <i data-feather="star" class="w-5 h-5 text-yellow-500"></i>
+                                    Pro Tip
+                                </h4>
+                                <p class="text-gray-700">
+                                    Untuk membuat papan permainan responsif, ganti ukuran piksel tetap (<code>100px</code>) dengan unit fraksional (<code>1fr</code>) dan atur <code>max-width</code> pada kontainer papan. Contoh: <code>grid-template-columns: repeat(3, 1fr);</code> dan <code>max-width: 315px;</code>. Ini akan membuat papan menyusut di layar kecil.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -1645,57 +1440,50 @@ h1 {
                             </div>
                             <div>
                                 <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">Tic-Tac-Toe: Logika JavaScript</h1>
-                                <p class="text-lg text-gray-600 mt-2">Menulis logika permainan untuk mengatur giliran, mendeteksi pemenang, dan mengatur ulang game.</p>
+                                <p class="text-lg text-gray-600 mt-2">Mengimplementasikan aturan permainan, pergantian giliran, pengecekan pemenang, dan fungsi reset.</p>
                             </div>
                         </div>
                         <div class="glass-card p-8 rounded-xl">
                             <h3 class="text-2xl font-bold mb-3">Kode Lengkap: script.js</h3>
-                            <p class="text-gray-600 mb-4">Salin kode berikut dan simpan dalam file bernama <code>script.js</code>. Kode ini mengandung logika inti dari game Tic-Tac-Toe.</p>
+                            <p class="text-gray-600 mb-4">Buat file <code>script.js</code> dan salin kode ini. Ini adalah "otak" dari permainan Tic-Tac-Toe kita.</p>
                             <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
 <pre><code>document.addEventListener('DOMContentLoaded', () => {
-    const statusDisplay = document.getElementById('status-player');
     const cells = document.querySelectorAll('.cell');
+    const statusText = document.getElementById('status');
     const restartButton = document.getElementById('restart-button');
 
-    let gameActive = true;
-    let currentPlayer = "X";
+    let currentPlayer = 'X';
     let gameState = ["", "", "", "", "", "", "", "", ""];
-
-    const winningMessage = () => `Pemain ${currentPlayer} Menang!`;
-    const drawMessage = () => `Permainan Seri!`;
-    const currentPlayerTurn = () => `Giliran: ${currentPlayer}`;
-
-    statusDisplay.innerHTML = currentPlayerTurn();
+    let gameActive = true;
 
     const winningConditions = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // Baris
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // Kolom
+        [0, 4, 8], [2, 4, 6]             // Diagonal
     ];
 
-    function handleCellPlayed(clickedCell, clickedCellIndex) {
+    function handleCellClick(e) {
+        const clickedCell = e.target;
+        const clickedCellIndex = parseInt(clickedCell.getAttribute('data-index'));
+
+        if (gameState[clickedCellIndex] !== "" || !gameActive) {
+            return;
+        }
+
         gameState[clickedCellIndex] = currentPlayer;
-        clickedCell.innerHTML = currentPlayer;
-        clickedCell.classList.add(currentPlayer.toLowerCase()); // Tambah kelas untuk styling
+        clickedCell.textContent = currentPlayer;
+        clickedCell.classList.add(currentPlayer.toLowerCase());
+
+        checkResult();
     }
 
-    function handlePlayerChange() {
-        currentPlayer = currentPlayer === "X" ? "O" : "X";
-        statusDisplay.innerHTML = currentPlayerTurn();
-    }
-
-    function handleResultValidation() {
+    function checkResult() {
         let roundWon = false;
         for (let i = 0; i < winningConditions.length; i++) {
             const winCondition = winningConditions[i];
-            const a = gameState[winCondition[0]];
-            const b = gameState[winCondition[1]];
-            const c = gameState[winCondition[2]];
+            let a = gameState[winCondition[0]];
+            let b = gameState[winCondition[1]];
+            let c = gameState[winCondition[2]];
             if (a === '' || b === '' || c === '') {
                 continue;
             }
@@ -1706,784 +1494,199 @@ h1 {
         }
 
         if (roundWon) {
-            statusDisplay.innerHTML = winningMessage();
+            statusText.textContent = `Pemain ${currentPlayer} Menang!`;
             gameActive = false;
             return;
         }
 
-        const roundDraw = !gameState.includes("");
-        if (roundDraw) {
-            statusDisplay.innerHTML = drawMessage();
+        if (!gameState.includes("")) {
+            statusText.textContent = `Permainan Seri!`;
             gameActive = false;
             return;
         }
 
-        handlePlayerChange();
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        statusText.textContent = `Giliran ${currentPlayer}`;
     }
 
-    function handleCellClick(event) {
-        const clickedCell = event.target;
-        const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
-
-        if (gameState[clickedCellIndex] !== "" || !gameActive) {
-            return;
-        }
-
-        handleCellPlayed(clickedCell, clickedCellIndex);
-        handleResultValidation();
-    }
-
-    function handleRestartGame() {
-        gameActive = true;
-        currentPlayer = "X";
+    function restartGame() {
+        currentPlayer = 'X';
         gameState = ["", "", "", "", "", "", "", "", ""];
-        statusDisplay.innerHTML = currentPlayerTurn();
+        gameActive = true;
+        statusText.textContent = `Giliran ${currentPlayer}`;
         cells.forEach(cell => {
-            cell.innerHTML = "";
-            cell.classList.remove('x', 'o'); // Hapus kelas styling
+            cell.textContent = '';
+            cell.classList.remove('x', 'o');
         });
     }
 
     cells.forEach(cell => cell.addEventListener('click', handleCellClick));
-    restartButton.addEventListener('click', handleRestartGame);
+    restartButton.addEventListener('click', restartGame);
 });</code></pre>
                             </div>
                             <div class="mt-6">
-                                <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Logika Penting:</h4>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Kode Penting:</h4>
                                 <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                    <li><code>gameState</code>: Array yang menyimpan status setiap sel (kosong, "X", atau "O"). Ini adalah "sumber kebenaran" (single source of truth) untuk kondisi permainan.</li>
-                                    <li><code>winningConditions</code>: Array 2D yang berisi semua kombinasi indeks sel yang bisa membuat kemenangan (8 kemungkinan total).</li>
-                                    <li><code>handleResultValidation</code>: Fungsi krusial yang dijalankan setelah setiap langkah. Ia akan memeriksa apakah ada kondisi kemenangan yang terpenuhi dengan membandingkan nilai di <code>gameState</code> dengan <code>winningConditions</code>.</li>
-                                    <li><code>handleCellClick</code>: Fungsi ini menangani klik pengguna. Ia pertama-tama memeriksa apakah sel sudah terisi atau game sudah berakhir sebelum melanjutkan.</li>
-                                    <li><code>handleRestartGame</code>: Fungsi ini mengatur ulang semua variabel state ke kondisi awal dan membersihkan tampilan papan, memungkinkan permainan dimulai lagi.</li>
+                                    <li><code>gameState</code>: Sebuah array yang merepresentasikan 9 sel di papan. Ini adalah "single source of truth" untuk kondisi permainan.</li>
+                                    <li><code>winningConditions</code>: Array 2D yang berisi semua kemungkinan kombinasi kemenangan.</li>
+                                    <li><code>handleCellClick()</code>: Fungsi yang dipanggil saat sel diklik. Fungsi ini memeriksa apakah sel valid untuk diisi, lalu memperbarui <code>gameState</code> dan UI.</li>
+                                    <li><code>checkResult()</code>: Setelah setiap langkah, fungsi ini memeriksa apakah ada pemenang atau permainan seri dengan cara mengiterasi <code>winningConditions</code>.</li>
+                                    <li><code>currentPlayer = currentPlayer === 'X' ? 'O' : 'X';</code>: Ekspresi ternary yang elegan untuk mengganti giliran pemain.</li>
+                                    <li><code>restartGame()</code>: Mengembalikan semua variabel state ke nilai awal dan membersihkan papan.</li>
                                 </ul>
                             </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            
-            <!-- LANGUAGE PAGES -->
-            <div id="html-page" class="tutorial-page hidden">
-                <section class="py-20 md:py-28">
-                    <div class="container mx-auto px-6 max-w-4xl">
-                        <a href="#" onclick="showMainContent(); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
-                            <i data-feather="arrow-left" class="w-4 h-4"></i>
-                            Kembali ke Kurikulum
-                        </a>
-                        <div class="flex items-center gap-6 mb-12">
-                            <div class="w-20 h-20 bg-red-500/10 border border-red-500/20 text-red-500 flex items-center justify-center rounded-xl flex-shrink-0">
-                                <i data-feather="code" class="w-10 h-10"></i>
-                            </div>
-                            <div>
-                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">Belajar HTML</h1>
-                                <p class="text-lg text-gray-600 mt-2">Pelajari fondasi web development dengan HTML, bahasa markup yang mendefinisikan struktur dan konten halaman web.</p>
-                            </div>
-                        </div>
-                        <div class="space-y-8">
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Apa itu HTML?</h3>
-                                <p class="text-gray-600 mb-4">HTML (HyperText Markup Language) bukanlah bahasa pemrograman, melainkan bahasa markup yang digunakan untuk membuat struktur halaman web. HTML menggunakan tag untuk menandai elemen-elemen seperti heading, paragraf, link, gambar, dan lainnya.</p>
-                                <p class="text-gray-600">Setiap halaman web yang kamu lihat di internet dibangun di atas struktur HTML. Browser seperti Chrome, Firefox, atau Safari membaca kode HTML ini lalu menampilkannya sebagai halaman web yang interaktif.</p>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Struktur Dasar Dokumen HTML</h3>
-                                <p class="text-gray-600 mb-4">Setiap dokumen HTML memiliki struktur dasar yang terdiri dari beberapa elemen wajib. Berikut adalah template paling sederhana:</p>
-                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="id"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Judul Halaman&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;!-- Konten halaman web ada di sini --&gt;
-    &lt;h1&gt;Ini adalah Heading&lt;/h1&gt;
-    &lt;p&gt;Ini adalah paragraf.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-                                </div>
-                                <div class="mt-4">
-                                    <h4 class="text-xl font-semibold mb-2 text-gray-900">Penjelasan Tag Penting:</h4>
-                                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                        <li><code>&lt;!DOCTYPE html&gt;</code>: Mendeklarasikan bahwa dokumen ini adalah HTML5.</li>
-                                        <li><code>&lt;html&gt;</code>: Elemen root yang membungkus seluruh konten halaman.</li>
-                                        <li><code>&lt;head&gt;</code>: Berisi informasi meta tentang halaman (seperti judul, charset, link ke CSS) yang tidak ditampilkan langsung di halaman.</li>
-                                        <li><code>&lt;body&gt;</code>: Berisi semua konten yang terlihat oleh pengguna (teks, gambar, video, dll).</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Tag-Tag HTML Umum</h3>
-                                <p class="text-gray-600 mb-4">HTML memiliki banyak tag untuk berbagai jenis konten. Berikut adalah beberapa yang paling sering digunakan:</p>
-                                <div class="grid md:grid-cols-2 gap-4">
-                                    <div class="bg-gray-50 p-4 rounded-lg">
-                                        <h5 class="font-semibold text-gray-800 mb-2">Heading & Paragraf</h5>
-                                        <code class="text-sm text-red-600">&lt;h1&gt;</code> hingga <code class="text-sm text-red-600">&lt;h6&gt;</code> untuk judul, <code class="text-sm text-red-600">&lt;p&gt;</code> untuk paragraf.
-                                    </div>
-                                    <div class="bg-gray-50 p-4 rounded-lg">
-                                        <h5 class="font-semibold text-gray-800 mb-2">Link & Gambar</h5>
-                                        <code class="text-sm text-red-600">&lt;a href="..."&gt;</code> untuk link, <code class="text-sm text-red-600">&lt;img src="..."&gt;</code> untuk gambar.
-                                    </div>
-                                    <div class="bg-gray-50 p-4 rounded-lg">
-                                        <h5 class="font-semibold text-gray-800 mb-2">Daftar</h5>
-                                        <code class="text-sm text-red-600">&lt;ul&gt;</code> (unordered), <code class="text-sm text-red-600">&lt;ol&gt;</code> (ordered), <code class="text-sm text-red-600">&lt;li&gt;</code> (item).
-                                    </div>
-                                    <div class="bg-gray-50 p-4 rounded-lg">
-                                        <h5 class="font-semibold text-gray-800 mb-2">Pemformatan Teks</h5>
-                                        <code class="text-sm text-red-600">&lt;strong&gt;</code> (penting), <code class="text-sm text-red-600">&lt;em&gt;</code> (penekanan), <code class="text-sm text-red-600">&lt;br&gt;</code> (baris baru).
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Atribut HTML</h3>
-                                <p class="text-gray-600 mb-4">Tag HTML bisa memiliki atribut yang memberikan informasi tambahan tentang elemen tersebut. Atribut ditulis dalam tag pembuka dengan format <code>nama="nilai"</code>.</p>
-                                <div class="bg-gray-50 p-4 rounded-lg">
-                                    <p class="font-semibold text-gray-800 mb-2">Contoh:</p>
-                                    <code class="text-sm text-red-600">&lt;a href="https://www.example.com" target="_blank"&gt;Kunjungi Example&lt;/a&gt;</code>
-                                    <p class="text-gray-600 mt-2">Di sini, <code>href</code> adalah atribut yang menentukan URL tujuan link, dan <code>target="_blank"</code> adalah atribut yang membuka link di tab baru.</p>
-                                </div>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Semantic HTML5</h3>
-                                <p class="text-gray-600 mb-4">HTML5 memperkenalkan tag semantic yang memberikan makna lebih jelas pada struktur halaman. Ini sangat baik untuk SEO dan aksesibilitas.</p>
-                                <div class="grid md:grid-cols-2 gap-4">
-                                    <div class="bg-gray-50 p-4 rounded-lg"><code class="text-sm text-red-600">&lt;header&gt;</code> - Bagian atas halaman atau seksi.</div>
-                                    <div class="bg-gray-50 p-4 rounded-lg"><code class="text-sm text-red-600">&lt;nav&gt;</code> - Bagian navigasi.</div>
-                                    <div class="bg-gray-50 p-4 rounded-lg"><code class="text-sm text-red-600">&lt;main&gt;</code> - Konten utama halaman.</div>
-                                    <div class="bg-gray-50 p-4 rounded-lg"><code class="text-sm text-red-600">&lt;article&gt;</code> - Konten yang berdiri sendiri.</div>
-                                    <div class="bg-gray-50 p-4 rounded-lg"><code class="text-sm text-red-600">&lt;section&gt;</code> - Seksi tematik dalam dokumen.</div>
-                                    <div class="bg-gray-50 p-4 rounded-lg"><code class="text-sm text-red-600">&lt;footer&gt;</code> - Bagian bawah halaman atau seksi.</div>
-                                </div>
+                            <div class="mt-6 pt-6 border-t border-gray-200">
+                                <h4 class="text-xl font-semibold mb-2 text-gray-900 flex items-center gap-2">
+                                    <i data-feather="star" class="w-5 h-5 text-yellow-500"></i>
+                                    Pro Tip
+                                </h4>
+                                <p class="text-gray-700">
+                                    Untuk membuat AI (lawan komputer) sederhana, Anda bisa membuat fungsi <code>aiMove()</code>. Setelah pemain bergerak, panggil fungsi ini. Di dalamnya, cari sel kosong secara acak dan isi dengan 'O'. Untuk AI yang lebih pintar, coba implementasikan logika untuk memblokir kemenangan pemain atau mencari langkah kemenangan untuk AI.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </section>
             </div>
 
-            <div id="css-page" class="tutorial-page hidden">
-                <section class="py-20 md:py-28">
-                    <div class="container mx-auto px-6 max-w-4xl">
-                        <a href="#" onclick="showMainContent(); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
-                            <i data-feather="arrow-left" class="w-4 h-4"></i>
-                            Kembali ke Kurikulum
-                        </a>
-                        <div class="flex items-center gap-6 mb-12">
-                            <div class="w-20 h-20 bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center rounded-xl flex-shrink-0">
-                                <i data-feather="pen-tool" class="w-10 h-10"></i>
-                            </div>
-                            <div>
-                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">Belajar CSS</h1>
-                                <p class="text-lg text-gray-600 mt-2">Ubah tampilan HTML yang polos menjadi halaman web yang indah dan menarik dengan CSS (Cascading Style Sheets).</p>
-                            </div>
-                        </div>
-                        <div class="space-y-8">
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Apa itu CSS?</h3>
-                                <p class="text-gray-600 mb-4">CSS adalah bahasa stylesheet yang digunakan untuk mengatur tampilan dan format dokumen HTML. Dengan CSS, kamu bisa mengontrol warna, font, jarak (spacing), layout, dan banyak aspek visual lainnya dari sebuah website.</p>
-                                <p class="text-gray-600">Istilah "Cascading" mengacu pada aturan prioritas. Jika ada beberapa aturan CSS yang berlaku untuk satu elemen yang sama, browser akan menentukan aturan mana yang paling penting (cascade down) berdasarkan aturan spesifisitas.</p>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Cara Menambahkan CSS ke HTML</h3>
-                                <p class="text-gray-600 mb-4">Ada tiga cara untuk menambahkan CSS ke halaman HTML:</p>
-                                <ol class="list-decimal list-inside text-gray-700 space-y-4">
-                                    <li>
-                                        <strong>Inline CSS:</strong> Menulis CSS langsung di atribut <code>style</code> sebuah tag HTML. <strong>Not recommended</strong> untuk proyek besar karena sulit dikelola.
-                                        <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto mt-2">
-<pre><code>&lt;p style="color: blue; font-size: 16px;"&gt;Ini paragraf biru.&lt;/p&gt;</code></pre>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <strong>Internal CSS:</strong> Menulis CSS di dalam tag <code>&lt;style&gt;</code> di bagian <code>&lt;head&gt;</code> dokumen HTML. Cocok untuk halaman satu halaman (single-page).
-                                        <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto mt-2">
-<pre><code>&lt;head&gt;
-    &lt;style&gt;
-        p {
-            color: blue;
-            font-size: 16px;
-        }
-    &lt;/style&gt;
-&lt;/head&gt;</code></pre>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <strong>External CSS (Best Practice):</strong> Menulis CSS di file terpisah (misalnya <code>style.css</code>) lalu menautkannya dari HTML. Ini adalah cara yang paling baik dan terorganisir.
-                                        <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto mt-2">
-<pre><code>&lt;!-- Di file HTML --&gt;
-&lt;head&gt;
-    &lt;link rel="stylesheet" href="style.css"&gt;
-&lt;/head&gt;
-
-&lt;!-- Di file style.css --&gt;
-p {
-    color: blue;
-    font-size: 16px;
-}</code></pre>
-                                        </div>
-                                    </li>
-                                </ol>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Sintaks Dasar CSS</h3>
-                                <p class="text-gray-600 mb-4">Aturan CSS terdiri dari dua bagian utama: <strong>Selector</strong> dan <strong>Declaration Block</strong>.</p>
-                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-<pre><code>selector {
-    property: value;
-    property: value;
-}</code></pre>
-                                </div>
-                                <ul class="list-disc list-inside text-gray-700 mt-4 space-y-2">
-                                    <li><strong>Selector:</strong> Menunjuk ke elemen HTML yang ingin di-styling (misalnya <code>p</code>, <code>h1</code>, <code>.my-class</code>).</li>
-                                    <li><strong>Property:</strong> Atribut gaya yang ingin diubah (misalnya <code>color</code>, <code>font-size</code>).</li>
-                                    <li><strong>Value:</strong> Nilai yang diberikan pada property (misalnya <code>blue</code>, <code>16px</code>).</li>
-                                </ul>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Selector CSS</h3>
-                                <p class="text-gray-600 mb-4">Selector adalah kunci untuk menargetkan elemen yang tepat. Berikut adalah selector yang paling umum:</p>
-                                <div class="space-y-2">
-                                    <div class="bg-gray-50 p-3 rounded-lg font-mono text-sm"><code>p</code> - Selector elemen (memilih semua <code>&lt;p&gt;</code>).</div>
-                                    <div class="bg-gray-50 p-3 rounded-lg font-mono text-sm"><code>.my-class</code> - Selector class (memilih semua elemen dengan <code>class="my-class"</code>).</div>
-                                    <div class="bg-gray-50 p-3 rounded-lg font-mono text-sm"><code>#my-id</code> - Selector ID (memilih satu elemen dengan <code>id="my-id"</code>).</div>
-                                    <div class="bg-gray-50 p-3 rounded-lg font-mono text-sm"><code>p, h1</code> - Grouping selector (memilih semua <code>&lt;p&gt;</code> dan <code>&lt;h1&gt;</code>).</div>
-                                    <div class="bg-gray-50 p-3 rounded-lg font-mono text-sm"><code>div p</code> - Descendant selector (memilih semua <code>&lt;p&gt;</code> di dalam <code>&lt;div&gt;</code>).</div>
-                                </div>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Box Model</h3>
-                                <p class="text-gray-600 mb-4">Setiap elemen HTML pada dasarnya adalah sebuah kotak. Box Model menjelaskan bagaimana kotak ini dibangun. Dari dalam ke luar, urutannya adalah:</p>
-                                <ol class="list-decimal list-inside text-gray-700 space-y-2">
-                                    <li><strong>Content:</strong> Konten sebenarnya (teks, gambar).</li>
-                                    <li><strong>Padding:</strong> Ruang kosong di antara konten dan border.</li>
-                                    <li><strong>Border:</strong> Garis yang mengelilingi padding.</li>
-                                    <li><strong>Margin:</strong> Ruang kosong di luar border, memisahkan elemen dari elemen lain.</li>
-                                </ol>
-                                <p class="text-gray-600 mt-4">Properti <code>box-sizing: border-box;</code> sangat berguna untuk membuat perhitungan ukuran elemen menjadi lebih intuitif.</p>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Layout dengan Flexbox dan Grid</h3>
-                                <p class="text-gray-600 mb-4">CSS modern menyediakan dua metode layout yang sangat kuat:</p>
-                                <div class="grid md:grid-cols-2 gap-4">
-                                    <div>
-                                        <h5 class="font-semibold text-gray-800 mb-2">Flexbox</h5>
-                                        <p class="text-gray-600">Cocok untuk layout satu dimensi (baris atau kolom). Sangat efektif untuk menyusun item, membuat navigasi, atau menengahkan konten.</p>
-                                        <div class="bg-gray-50 p-2 rounded-lg font-mono text-xs mt-2"><code>display: flex;</code></div>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-semibold text-gray-800 mb-2">Grid</h5>
-                                        <p class="text-gray-600">Cocok untuk layout dua dimensi (baris dan kolom). Sempurna untuk membuat keseluruhan layout halaman, seperti yang kita lihat di website modern.</p>
-                                        <div class="bg-gray-50 p-2 rounded-lg font-mono text-xs mt-2"><code>display: grid;</code></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Responsive Design</h3>
-                                <p class="text-gray-600 mb-4">Website harus terlihat baik di berbagai ukuran layar (desktop, tablet, mobile). CSS Media Queries memungkinkan kita menerapkan gaya yang berbeda berdasarkan karakteristik perangkat.</p>
-                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-<pre><code>/* Gaya default untuk desktop */
-.container {
-    width: 1200px;
-}
-
-/* Gaya untuk tablet dan layar lebih kecil */
-@media (max-width: 768px) {
-    .container {
-        width: 100%;
-        padding: 10px;
-    }
-}</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <div id="js-page" class="tutorial-page hidden">
-                <section class="py-20 md:py-28">
-                    <div class="container mx-auto px-6 max-w-4xl">
-                        <a href="#" onclick="showMainContent(); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
-                            <i data-feather="arrow-left" class="w-4 h-4"></i>
-                            Kembali ke Kurikulum
-                        </a>
-                        <div class="flex items-center gap-6 mb-12">
-                            <div class="w-20 h-20 bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center rounded-xl flex-shrink-0">
-                                <i data-feather="zap" class="w-10 h-10"></i>
-                            </div>
-                            <div>
-                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">Belajar JavaScript</h1>
-                                <p class="text-lg text-gray-600 mt-2">Bawa halaman webmu hidup dengan JavaScript, bahasa pemrograman yang menggerakkan interaktivitas dan logika di browser.</p>
-                            </div>
-                        </div>
-                        <div class="space-y-8">
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Apa itu JavaScript?</h3>
-                                <p class="text-gray-600 mb-4">JavaScript adalah bahasa pemrograman tingkat tinggi yang terutama digunakan untuk membuat halaman web interaktif. Di dalam browser, JavaScript bisa memanipulasi DOM (Document Object Model), merespon event pengguna (klik, ketik, scroll), dan berkomunikasi dengan server.</p>
-                                <p class="text-gray-600">Berbeda dengan HTML (struktur) dan CSS (gaya), JavaScript adalah "otak" yang memungkinkan logika dan dinamisme pada halaman web. Saat ini, JavaScript juga bisa digunakan di sisi server (Node.js) dan untuk pengembangan aplikasi mobile (React Native).</p>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Menambahkan JavaScript ke HTML</h3>
-                                <p class="text-gray-600 mb-4">Sama seperti CSS, ada cara untuk menambahkan JavaScript, tetapi yang paling umum dan direkomendasikan adalah file eksternal.</p>
-                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-<pre><code>&lt;!-- Di file HTML, biasanya di akhir &lt;body&gt; --&gt;
-&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre>
-                                </div>
-                                <p class="text-gray-600 mt-4">Menaruh tag <code>&lt;script&gt;</code> di akhir <code>&lt;body&gt;</code> adalah praktik terbaik karena memastikan semua elemen HTML telah dimuat sebelum JavaScript mencoba memanipulasinya.</p>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Variabel dan Tipe Data</h3>
-                                <p class="text-gray-600 mb-4">Variabel adalah wadah untuk menyimpan data. Di JavaScript modern, gunakan <code>let</code> dan <code>const</code>.</p>
-                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-<pre><code>// Variabel yang bisa diubah nilainya
-let age = 25;
-age = 26; // OK
-
-// Variabel yang tidak bisa diubah nilainya (konstanta)
-const name = "Alice";
-// name = "Bob"; // Akan menyebabkan error
-
-// Tipe Data Dasar
-let myNumber = 10;           // Number
-let myString = "Hello";       // String
-let isTrue = true;            // Boolean
-let nothing = null;           // Null (sengaja kosong)
-let notDefined;               // Undefined (belum diberi nilai)</code></pre>
-                                </div>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Array dan Object</h3>
-                                <p class="text-gray-600 mb-4">Ini adalah dua struktur data yang paling penting di JavaScript.</p>
-                                <div class="grid md:grid-cols-2 gap-4">
-                                    <div>
-                                        <h5 class="font-semibold text-gray-800 mb-2">Array (Daftar)</h5>
-                                        <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-<pre><code>let fruits = ["Apple", "Banana", "Cherry"];
-console.log(fruits[0]); // "Apple"
-fruits.push("Orange"); // Menambah item</code></pre>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-semibold text-gray-800 mb-2">Object (Struktur)</h5>
-                                        <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-<pre><code>let person = {
-    name: "Bob",
-    age: 30,
-    isStudent: false
-};
-console.log(person.name); // "Bob"</code></pre>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Fungsi (Function)</h3>
-                                <p class="text-gray-600 mb-4">Fungsi adalah blok kode yang bisa digunakan kembali. Mereka menerima input (parameter) dan bisa mengembalikan output (return value).</p>
-                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-<pre><code>// Deklarasi fungsi
-function greet(name) {
-    return "Hello, " + name;
-}
-
-// Arrow function (lebih modern)
-const add = (a, b) => a + b;
-
-// Memanggil fungsi
-console.log(greet("World")); // "Hello, World"
-console.log(add(5, 3));      // 8</code></pre>
-                                </div>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Manipulasi DOM (Document Object Model)</h3>
-                                <p class="text-gray-600 mb-4">Ini adalah inti dari interaktivitas web. DOM adalah representasi struktur halaman HTML yang bisa diakses dan diubah oleh JavaScript.</p>
-                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-<pre><code>// Mengambil elemen
-const myHeading = document.getElementById('my-heading');
-const allButtons = document.querySelectorAll('button');
-
-// Mengubah konten
-myHeading.textContent = "Judul Baru!";
-
-// Mengubah gaya
-myHeading.style.color = 'blue';
-
-// Menambahkan event listener
-allButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        alert('Tombol diklik!');
-    });
-});</code></pre>
-                                </div>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Event dan Event Listener</h3>
-                                <p class="text-gray-600 mb-4">Event adalah aksi yang terjadi di halaman (klik mouse, tekan keyboard, dll). Event Listener adalah fungsi yang "menunggu" event tertentu terjadi lalu menjalankan kode.</p>
-                                <p class="text-gray-600">Contoh yang paling umum adalah <code>DOMContentLoaded</code>, yang memastikan kode JavaScript berjalan hanya setelah seluruh HTML dimuat, dan <code>'click'</code>, yang merespons klik pengguna.</p>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Asynchronous JavaScript: Promises & Async/Await</h3>
-                                <p class="text-gray-600 mb-4">Banyak operasi di web (seperti mengambil data dari server) bersifat asynchronous (tidak langsung selesai). <code>Promise</code> dan <code>async/await</code> adalah cara modern untuk menangani operasi ini agar kode tetap bersih dan mudah dibaca.</p>
-                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-<pre><code>// Menggunakan fetch API dengan async/await
-async function getData() {
-    try {
-        const response = await fetch('https://api.example.com/data');
-        const data = await response.json();
-        console.log(data);
-    } catch (error) {
-        console.error('Gagal mengambil data:', error);
-    }
-}
-
-getData();</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <div id="react-page" class="tutorial-page hidden">
-                <section class="py-20 md:py-28">
-                    <div class="container mx-auto px-6 max-w-4xl">
-                        <a href="#" onclick="showMainContent(); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
-                            <i data-feather="arrow-left" class="w-4 h-4"></i>
-                            Kembali ke Kurikulum
-                        </a>
-                        <div class="flex items-center gap-6 mb-12">
-                            <div class="w-20 h-20 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center rounded-xl flex-shrink-0">
-                                <i data-feather="box" class="w-10 h-10"></i>
-                            </div>
-                            <div>
-                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">Belajar React</h1>
-                                <p class="text-lg text-gray-600 mt-2">Bangun antarmuka pengguna (UI) yang kompleks dan efisien dengan React, library JavaScript paling populer dari Facebook.</p>
-                            </div>
-                        </div>
-                        <div class="space-y-8">
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Apa itu React?</h3>
-                                <p class="text-gray-600 mb-4">React adalah library JavaScript untuk membangun User Interface (UI). Dikembangkan oleh Facebook, React memungkinkan kita membuat UI yang interaktif dengan memecahnya menjadi komponen-komponen kecil yang bisa digunakan kembali.</p>
-                                <p class="text-gray-600">Konsep kunci React adalah <strong>declarative</strong>. Alih-alih memberitahu browser "cara" mengubah UI (imperative), kita hanya perlu mendeskripsikan "bagaimana seharusnya" UI terlihat untuk setiap state, dan React akan menangani pembaruan DOM secara efisien.</p>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Konsep Inti React</h3>
-                                <div class="space-y-4">
-                                    <div>
-                                        <h5 class="font-semibold text-gray-800 mb-2">1. Komponen (Components)</h5>
-                                        <p class="text-gray-600">Komponen adalah blok bangunan utama React. Mereka seperti fungsi JavaScript yang menerima input (<code>props</code>) dan mengembalikan elemen React yang mendeskripsikan apa yang harus ditampilkan di layar.</p>
-                                        <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto mt-2">
-<pre><code>// Komponen Fungsi
-function Welcome(props) {
-    return &lt;h1&gt;Halo, {props.name}&lt;/h1&gt;;
-}
-
-// Menggunakan komponen
-&lt;Welcome name="Alice" /&gt;</code></pre>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-semibold text-gray-800 mb-2">2. JSX (JavaScript XML)</h5>
-                                        <p class="text-gray-600">JSX adalah ekstensi sintaks untuk JavaScript yang memungkinkan kita menulis kode yang mirip HTML langsung di dalam file JavaScript. Ini membuat kode komponen lebih intuitif.</p>
-                                        <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto mt-2">
-<pre><code>const element = &lt;h1&gt;Halo, dunia!&lt;/h1&gt;;</code></pre>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-semibold text-gray-800 mb-2">3. Props (Properties)</h5>
-                                        <p class="text-gray-600">Props adalah argumen yang dilewatkan ke komponen, mirip seperti parameter fungsi. Mereka bersifat read-only dan digunakan untuk mengirim data dari komponen induk ke anak.</p>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-semibold text-gray-800 mb-2">4. State</h5>
-                                        <p class="text-gray-600">State adalah objek yang menyimpan data yang bisa berubah seiring waktu di dalam komponen. Ketika state berubah, React akan merender ulang komponen untuk mencerminkan perubahan tersebut. Hook <code>useState</code> digunakan untuk menambah state ke komponen fungsi.</p>
-                                        <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto mt-2">
-<pre><code>import { useState } from 'react';
-
-function Counter() {
-    const [count, setCount] = useState(0);
-
-    return (
-        &lt;div&gt;
-            &lt;p&gt;Anda menekan {count} kali&lt;/p&gt;
-            &lt;button onClick={() => setCount(count + 1)}&gt;
-                Klik saya
-            &lt;/button&gt;
-        &lt;/div&gt;
-    );
-}</code></pre>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">React Hooks</h3>
-                                <p class="text-gray-600 mb-4">Hooks adalah fungsi khusus yang memungkinkan kita "mengaitkan" state dan fitur React lainnya ke komponen fungsi. Mereka membuat kode lebih ringkas dan mudah dipahami.</p>
-                                <div class="grid md:grid-cols-2 gap-4">
-                                    <div>
-                                        <h5 class="font-semibold text-gray-800 mb-2"><code>useState</code></h5>
-                                        <p class="text-gray-600">Seperti yang sudah dibahas, ini adalah Hook yang paling dasar untuk menambah state lokal ke komponen.</p>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-semibold text-gray-800 mb-2"><code>useEffect</code></h5>
-                                        <p class="text-gray-600">Digunakan untuk melakukan "side effect" seperti mengambil data, berlangganan, atau secara manual mengubah DOM. Ia berjalan setelah setiap render.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Manajemen State Lanjutan (Context API)</h3>
-                                <p class="text-gray-600 mb-4">Untuk aplikasi yang lebih besar, meneruskan state melalui banyak tingkatan komponen (prop drilling) bisa menjadi masalah. React Context API menyediakan cara untuk berbagi data (state) ke seluruh komponen tanpa harus melewatkan props secara manual di setiap level.</p>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Ekosistem React</h3>
-                                <p class="text-gray-600 mb-4">React tidak berdiri sendiri. Ia didukung oleh ekosistem yang kaya:</p>
-                                <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                    <li><strong>React Router:</strong> Untuk menangani navigasi dan routing di aplikasi single-page.</li>
-                                    <li><strong>Axios / Fetch API:</strong> Untuk melakukan request HTTP dan berkomunikasi dengan backend API.</li>
-                                    <li><strong>Redux / Zustand:</strong> Library manajemen state global untuk aplikasi yang sangat kompleks.</li>
-                                    <li><strong>Next.js:</strong> Framework React yang menawarkan rendering di sisi server (SSR) dan generasi situs statis (SSG).</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <div id="python-page" class="tutorial-page hidden">
-                <section class="py-20 md:py-28">
-                    <div class="container mx-auto px-6 max-w-4xl">
-                        <a href="#" onclick="showMainContent(); return false;" class="inline-flex items-center gap-2 glass-card text-sm font-semibold px-4 py-2 rounded-lg hover:bg-white/80 transition-colors duration-300 mb-12">
-                            <i data-feather="arrow-left" class="w-4 h-4"></i>
-                            Kembali ke Kurikulum
-                        </a>
-                        <div class="flex items-center gap-6 mb-12">
-                            <div class="w-20 h-20 bg-green-500/10 border border-green-500/20 text-green-400 flex items-center justify-center rounded-xl flex-shrink-0">
-                                <i data-feather="terminal" class="w-10 h-10"></i>
-                            </div>
-                            <div>
-                                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">Belajar Python</h1>
-                                <p class="text-lg text-gray-600 mt-2">Jelajahi kekuatan Python, bahasa pemrograman serbaguna yang sangat populer untuk web development, data science, automasi, dan kecerdasan buatan.</p>
-                            </div>
-                        </div>
-                        <div class="space-y-8">
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Apa itu Python?</h3>
-                                <p class="text-gray-600 mb-4">Python adalah bahasa pemrograman tingkat tinggi yang diketahui karena sintaksnya yang bersih, mudah dibaca, dan sederhana. Filosofi "Zen of Python" menekankan pada keterbacaan dan kesederhanaan.</p>
-                                <p class="text-gray-600">Python adalah bahasa yang diinterpretasikan, yang berarti kode bisa dijalankan baris per baris, membuat proses development dan debugging lebih cepat. Ia sangat serbaguna dan digunakan di berbagai bidang, dari pengembangan web hingga penelitian ilmiah.</p>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Instalasi dan Menjalankan Python</h3>
-                                <p class="text-gray-600 mb-4">Untuk memulai, unduh dan instal Python dari situs resmi <a href="https://www.python.org" target="_blank" class="text-blue-500 underline">python.org</a>. Pastikan untuk mencentang "Add Python to PATH" saat instalasi.</p>
-                                <p class="text-gray-600 mb-4">Kamu bisa menjalankan kode Python dengan dua cara:</p>
-                                <ol class="list-decimal list-inside text-gray-700 space-y-2">
-                                    <li><strong>Interactive Mode:</strong> Buka terminal/command prompt, ketik <code>python</code>, dan tulis kode langsung di sana.</li>
-                                    <li><strong>Script Mode:</strong> Simpan kode dalam file dengan ekstensi <code>.py</code> (misalnya <code>app.py</code>), lalu jalankan dari terminal dengan perintah <code>python app.py</code>.</li>
-                                </ol>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Sintaks Dasar Python</h3>
-                                <p class="text-gray-600 mb-4">Python menggunakan indentasi (spasi atau tab) untuk mendefinisikan blok kode, bukan tanda kurung kurawal seperti di JavaScript atau C++.</p>
-                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-<pre><code># Ini adalah komentar
-# Variabel tidak perlu deklarasi tipe
-name = "Python"
-version = 3.9
-is_fun = True
-
-# Print output
-print(f"Selamat datang di {name} versi {version}")
-
-# Struktur kontrol (if/else)
-if is_fun:
-    print("Python itu menyenangkan!")
-else:
-    print("Mungkin kamu perlu coba lagi.")
-
-# Perulangan (for loop)
-for i in range(5):
-    print(f"Perulangan ke-{i}")</code></pre>
-                                </div>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Struktur Data: List, Tuple, Dictionary</h3>
-                                <p class="text-gray-600 mb-4">Python memiliki struktur data bawaan yang sangat powerful.</p>
-                                <div class="space-y-4">
-                                    <div>
-                                        <h5 class="font-semibold text-gray-800 mb-2">List (Array)</h5>
-                                        <p class="text-gray-600">Koleksi item yang terurut dan bisa diubah (mutable).</p>
-                                        <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto mt-2">
-<pre><code>fruits = ["apple", "banana", "cherry"]
-fruits.append("orange")
-print(fruits[0]) # "apple"</code></pre>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-semibold text-gray-800 mb-2">Tuple</h5>
-                                        <p class="text-gray-600">Koleksi item yang terurut tetapi tidak bisa diubah (immutable).</p>
-                                        <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto mt-2">
-<pre><code>coordinates = (10, 20)
-# coordinates[0] = 15 # Akan error</code></pre>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-semibold text-gray-800 mb-2">Dictionary (Object)</h5>
-                                        <p class="text-gray-600">Koleksi pasangan key-value yang tidak terurut.</p>
-                                        <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto mt-2">
-<pre><code>person = {
-    "name": "Budi",
-    "age": 30
-}
-print(person["name"]) # "Budi"</code></pre>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Fungsi dan Modul</h3>
-                                <p class="text-gray-600 mb-4">Fungsi didefinisikan dengan kata kunci <code>def</code>. Python memiliki standar library yang sangat besar (modul) yang bisa langsung digunakan.</p>
-                                <div class="bg-gray-900/90 border border-gray-700 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-<pre><code># Mendefinisikan fungsi
-def greet(name, language="Indonesia"):
-    if language == "Indonesia":
-        return f"Halo, {name}!"
-    else:
-        return f"Hello, {name}!"
-
-# Menggunakan fungsi
-print(greet("Andi")) # "Halo, Andi!"
-
-# Mengimpor modul
-import math
-print(math.sqrt(16)) # 4.0
-
-# Mengimpor fungsi spesifik dari modul
-from datetime import datetime
-print(datetime.now())</code></pre>
-                                </div>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Python untuk Web Development</h3>
-                                <p class="text-gray-600 mb-4">Meskipun bukan pilihan utama untuk frontend, Python sangat kuat di sisi backend. Framework web populer seperti <strong>Django</strong> dan <strong>Flask</strong> memungkinkan kita membangun API dan aplikasi web yang robust dengan cepat.</p>
-                                <p class="text-gray-600">Flask adalah micro-framework yang ringan dan fleksibel, sementara Django adalah "batteries-included" framework yang menyediakan hampir semua yang dibutuhkan untuk membangun aplikasi web kompleks.</p>
-                            </div>
-                            <div class="glass-card p-8 rounded-xl">
-                                <h3 class="text-2xl font-bold mb-4">Python untuk Data Science & AI</h3>
-                                <p class="text-gray-600 mb-4">Ini adalah area di mana Python benar-benar bersinar. Library seperti <strong>Pandas</strong> (untuk manipulasi data), <strong>NumPy</strong> (untuk komputasi numerik), <strong>Matplotlib</strong> (untuk visualisasi), dan <strong>Scikit-learn</strong> / <strong>TensorFlow</strong> (untuk machine learning) adalah standar industri.</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
         </div>
+        
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-8">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p>&copy; 2025 PanduanKoding. Semua Hak Cipta Dilindungi.</p>
+                    </div>
+                    <div class="text-sm whitespace-pre-line">
+                        <p>pengisi web site = akhtar
+desain = zahran al k
+dan marino = ujicoba web site</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-12">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2024 PanduanKoding. Semua hak dilindungi.</p>
-            <p class="mt-2">Dibuat dengan ❤️ untuk para calon developer Indonesia.</p>
-        </div>
-    </footer>
-
-    <!-- JavaScript -->
     <script>
         // Initialize Feather Icons
         feather.replace();
-
+        
         // Matrix Rain Effect
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
-
+        
         canvas.width = window.innerWidth;
-        canvas.height = document.querySelector('.spotlight-effect').offsetHeight;
-
+        canvas.height = window.innerHeight;
+        
         const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
         const matrixArray = matrix.split("");
-
+        
         const fontSize = 10;
         const columns = canvas.width / fontSize;
-
+        
         const drops = [];
         for(let x = 0; x < columns; x++) {
             drops[x] = 1;
         }
-
+        
         function drawMatrix() {
-            ctx.fillStyle = 'rgba(248, 249, 250, 0.04)';
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#4F46E5';
+            
+            ctx.fillStyle = '#0F0';
             ctx.font = fontSize + 'px monospace';
-
+            
             for(let i = 0; i < drops.length; i++) {
                 const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
+                
                 if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
                     drops[i] = 0;
                 }
                 drops[i]++;
             }
         }
-
+        
         setInterval(drawMatrix, 35);
-
-        // Handle window resize for canvas
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = document.querySelector('.spotlight-effect').offsetHeight;
-        });
-
-        // Scroll Reveal Animation
-        function handleReveal() {
+        
+        // Reveal on scroll
+        function reveal() {
             const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(element => {
+            
+            for(let i = 0; i < reveals.length; i++) {
                 const windowHeight = window.innerHeight;
-                const elementTop = element.getBoundingClientRect().top;
+                const elementTop = reveals[i].getBoundingClientRect().top;
                 const elementVisible = 150;
-
-                if (elementTop < windowHeight - elementVisible) {
-                    element.classList.add('visible');
+                
+                if(elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('visible');
                 }
-            });
-        }
-
-        window.addEventListener('scroll', handleReveal);
-        handleReveal(); // Initial check
-
-        // Page Navigation Logic
-        function showMainContent() {
-            document.querySelectorAll('.tutorial-page').forEach(page => {
-                page.classList.add('hidden');
-            });
-            document.querySelector('main').classList.remove('hidden');
-            document.querySelector('footer').classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function showProjectLanding(projectName) {
-            document.querySelector('main').classList.add('hidden');
-            document.querySelector('footer').classList.add('hidden');
-            document.querySelectorAll('.tutorial-page').forEach(page => {
-                page.classList.add('hidden');
-            });
-            const landingPage = document.getElementById(`${projectName}-landing-page`);
-            if (landingPage) {
-                landingPage.classList.remove('hidden');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
-
-        function showTutorial(tutorialId) {
-            document.querySelector('main').classList.add('hidden');
-            document.querySelector('footer').classList.add('hidden');
-            document.querySelectorAll('.tutorial-page').forEach(page => {
+        
+        window.addEventListener('scroll', reveal);
+        reveal(); // Initial check
+        
+        // Page navigation functions
+        function showMainContent() {
+            // Hide all tutorial pages
+            const tutorialPages = document.querySelectorAll('.tutorial-page');
+            tutorialPages.forEach(page => {
                 page.classList.add('hidden');
             });
+            
+            // Show main content
+            document.querySelector('main').style.display = 'block';
+            document.querySelector('footer').style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        function showProjectLanding(project) {
+            // Hide main content
+            document.querySelector('main').style.display = 'none';
+            document.querySelector('footer').style.display = 'none';
+            
+            // Hide all tutorial pages
+            const tutorialPages = document.querySelectorAll('.tutorial-page');
+            tutorialPages.forEach(page => {
+                page.classList.add('hidden');
+            });
+            
+            // Show specific project landing page
+            const landingPage = document.getElementById(`${project}-landing-page`);
+            if (landingPage) {
+                landingPage.classList.remove('hidden');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        function showTutorial(tutorialId) {
+            // Hide all tutorial pages
+            const tutorialPages = document.querySelectorAll('.tutorial-page');
+            tutorialPages.forEach(page => {
+                page.classList.add('hidden');
+            });
+            
+            // Show specific tutorial page
             const tutorialPage = document.getElementById(tutorialId);
             if (tutorialPage) {
                 tutorialPage.classList.remove('hidden');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
         }
+        
+        // Handle window resize for canvas
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
